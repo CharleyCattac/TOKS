@@ -1,6 +1,7 @@
 package UI;
 
 import enums.*;
+import jssc.SerialPort;
 import jssc.SerialPortList;
 
 import javax.swing.*;
@@ -30,22 +31,16 @@ public class DebugControlBlock extends JPanel {
             JLabel label = new JLabel(rows[i], JLabel.RIGHT);
             labelPanel.add(label);
 
-            switch (i) {
-                case 0: {
-                    comboBoxPanel.add(comPortsComboBox);
-                }
-                case 1: {
-                    comboBoxPanel.add(baudRateComboBox);
-                }
-                case 2: {
-                    comboBoxPanel.add(dataBitsComboBox);
-                }
-                case 3: {
-                    comboBoxPanel.add(stopBitsComboBox);
-                }
-                case 4: {
-                    comboBoxPanel.add(parityComboBox);
-                }
+            if (i == MyEnums.COM_PORT.getValue()) {
+                comboBoxPanel.add(comPortsComboBox);
+            } else if (i == MyEnums.BAUDRATE.getValue()) {
+                comboBoxPanel.add(baudRateComboBox);
+            } else if (i == MyEnums.DATABITS.getValue()) {
+                comboBoxPanel.add(dataBitsComboBox);
+            } else if (i == MyEnums.PARTIY.getValue()) {
+                comboBoxPanel.add(parityComboBox);
+            } else if (i == MyEnums.STOPBITS.getValue()) {
+                comboBoxPanel.add(stopBitsComboBox);
             }
         }
 
@@ -57,8 +52,18 @@ public class DebugControlBlock extends JPanel {
 //                    button.setText("Disconnect");
 //            }
 //        });
-        button.addActionListener((event) -> button.setText("Disconnect"));
+        button.addActionListener((event) -> {
+                    if (button.getText().equals("Connect")) {
+                        button.setText("Disconnect");
+                    } else if (button.getText().equals("Disconnect")) {
+                        button.setText("Connect");
+                    }
+                });
         buttonPanel.add(button);
+
+//        comPortsComboBox.addActionListener(event -> {
+//            if (comPortsComboBox.getSelectedItem())
+//                }
 //        JLabel label = new JLabel(labelName, JLabel.RIGHT);
 //        label.setLabelFor(aJTextArea);
 //

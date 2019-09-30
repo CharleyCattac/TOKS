@@ -1,6 +1,6 @@
 package enums;
 
-public enum DataBitsEnum implements MyEnums {
+public enum DataBitsEnum {
     DATABITS_5(5), DATABITS_6(6),
     DATABITS_7(7), DATABITS_8(8);
 
@@ -12,9 +12,5 @@ public enum DataBitsEnum implements MyEnums {
 
     public int getValue() {
         return value;
-    }
-
-    public MyEnums[] getValues() {
-        return DataBitsEnum.values();
     }
 }

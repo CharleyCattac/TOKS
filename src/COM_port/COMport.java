@@ -1,11 +1,15 @@
 package COM_port;
 
-import javafx.embed.swing.JFXPanel;
 import jssc.*;
 
 public class COMport {
 
     private static SerialPort serialPort;
+
+//    public COMport(String serialPortName) {
+//        serialPort = new SerialPort(serialPortName);
+//        serialPort.openPort();
+//    }
 
     static public void main(String[] args) {
 

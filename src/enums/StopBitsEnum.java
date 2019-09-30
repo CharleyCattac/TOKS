@@ -1,6 +1,6 @@
 package enums;
 
-public enum StopBitsEnum implements MyEnums {
+public enum StopBitsEnum {
     STOPBITS_1("1", 1), STOPBITS_1_5("1.5", 2),
     STOPBITS_2("2", 3);
 
@@ -18,9 +18,5 @@ public enum StopBitsEnum implements MyEnums {
 
     public String getName() {
         return name;
-    }
-
-    public MyEnums[] getValues() {
-        return StopBitsEnum.values();
     }
 }

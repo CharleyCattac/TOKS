@@ -1,6 +1,6 @@
 package enums;
 
-public enum ParityEnum implements MyEnums {
+public enum ParityEnum {
     PARITY_NO("NONE", 0), PARTITY_ODD("0DD", 1),
     PARITY_EVEN("EVEN", 2), PARITY_MARK("MARK", 3),
     PARITY_SPACE("SPACE", 4);
@@ -19,9 +19,5 @@ public enum ParityEnum implements MyEnums {
 
     public String getName() {
         return name;
-    }
-
-    public MyEnums[] getValues() {
-        return ParityEnum.values();
     }
 }
