@@ -13,7 +13,7 @@ public enum ParityEnum {
         this.value = value;
     }
 
-    private int getValue() {
+    public int getValue() {
         return value;
     }
 

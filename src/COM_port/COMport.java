@@ -6,21 +6,16 @@ public class COMport {
 
     private static SerialPort serialPort;
 
-//    public COMport(String serialPortName) {
-//        serialPort = new SerialPort(serialPortName);
-//        serialPort.openPort();
-//    }
-
-    static public void main(String[] args) {
-
-        serialPort = new SerialPort(SerialPortList.getPortNames()[0]);
+    public void initializePort(String portName, int baudRate, int dataBits,
+                               int stopBits, int parityMode) {
+        serialPort = new SerialPort(portName);
 
         try {
             serialPort.openPort();
-            serialPort.setParams(SerialPort.BAUDRATE_9600,
-                    SerialPort.DATABITS_8,
-                    SerialPort.STOPBITS_1,
-                    SerialPort.PARITY_NONE);
+            serialPort.setParams(baudRate,
+                    dataBits,
+                    stopBits,
+                    parityMode);
 
             serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN |
                                           SerialPort.FLOWCONTROL_RTSCTS_OUT);
@@ -36,6 +31,10 @@ public class COMport {
         catch (SerialPortException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void closePort() {
+        System.out.println("I close port");
     }
 
     private static class PortReader implements SerialPortEventListener {

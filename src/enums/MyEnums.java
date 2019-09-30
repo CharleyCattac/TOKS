@@ -14,13 +14,4 @@ public enum MyEnums {
     public int getValue() {
         return value;
     }
-
-    public static int getMyEnumsByNumber(MyEnums enums) {
-        for (MyEnums element : values()) {
-            if (element == enums) {
-                return element.value;
-            }
-        }
-        return -1;
-    }
 }

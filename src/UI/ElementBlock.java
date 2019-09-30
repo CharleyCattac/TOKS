@@ -21,6 +21,10 @@ public class ElementBlock extends JPanel {
         add(textPanel, BorderLayout.CENTER);
 
         textField = new JTextArea();
+        textField.setColumns(textFieldWidth);
+        textField.setRows(textFieldHeight);
+        textField.setAutoscrolls(true);
+        textField.setLineWrap(true);
         textField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 textField.setEditable(true);
@@ -31,11 +35,6 @@ public class ElementBlock extends JPanel {
                 System.out.println("Focus is lost");
             }
         });
-        textField.setColumns(textFieldWidth);
-        textField.setRows(textFieldHeight);
-        textField.setAutoscrolls(true);
-        textField.setLineWrap(true);
-
         textField.addMouseListener(new MouseListener() {
             @Override
             public void mouseClicked(java.awt.event.MouseEvent e) {
@@ -87,9 +86,8 @@ public class ElementBlock extends JPanel {
             }
         });
 
-        if (labelName.equals("Output")) {
             textField.setFocusable(false);
-        }
+            textField.setEditable(false);
 
         JScrollPane sp = new JScrollPane(textField);
         sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
