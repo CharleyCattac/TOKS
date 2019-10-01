@@ -1,6 +1,7 @@
 package COM_port;
 
 import jssc.*;
+import services.Mediator;
 
 public class COMport {
 

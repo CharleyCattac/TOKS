@@ -1,4 +1,4 @@
-package UI;
+package services;
 
 import javax.swing.*;
 

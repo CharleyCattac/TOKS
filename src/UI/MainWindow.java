@@ -2,7 +2,7 @@ package UI;
 
 import javax.swing.*;
 import java.awt.*;
-import COM_port.Mediator;
+import services.Mediator;
 
 public class MainWindow {
 
