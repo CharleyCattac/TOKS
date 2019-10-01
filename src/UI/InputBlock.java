@@ -3,6 +3,8 @@ package UI;
 import services.Mediator;
 
 import javax.swing.*;
+import javax.swing.text.Caret;
+import java.awt.*;
 import java.awt.event.*;
 
 public class InputBlock extends ElementBlock {
@@ -14,6 +16,7 @@ public class InputBlock extends ElementBlock {
         super(mediator, labelName, textFieldWidth, textFieldHeight);
 
         getTextField().setEditable(false);
+        getTextField().getCaret().setVisible(true);
 
         String[] keys = {"UP", "DOWN", "LEFT", "RIGHT", "DELETE", "BACK_SPACE", "CONTROL"};
         InputMap inputMap = getTextField().getInputMap();
@@ -25,6 +28,7 @@ public class InputBlock extends ElementBlock {
         getTextField().addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 getTextField().setEditable(true);
+                getTextField().setCaretColor(Color.BLACK);
             }
 
             public void focusLost(FocusEvent e) {
@@ -41,6 +45,7 @@ public class InputBlock extends ElementBlock {
             public void mousePressed(java.awt.event.MouseEvent e) {
                 getTextField().setCaretPosition(lastPositionInFile - 1);
                 getTextField().setEditable(false);
+                getTextField().setCaretColor(Color.BLACK);
             }
 
             @Override

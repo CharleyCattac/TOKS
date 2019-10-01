@@ -1,5 +1,6 @@
 package UI;
 
+import javafx.scene.control.ComboBox;
 import services.DebugLine;
 import services.Mediator;
 import enums.*;
@@ -27,19 +28,6 @@ public class DebugControlBlock extends JPanel {
 
     public DebugControlBlock(Mediator mediator, String[] rows) {
         super(new BorderLayout());
-        
-        ActionListener listener = event -> {
-            if (isAllFieldsNonEmpty()) {
-                connectButton.setEnabled(true);
-                writeToDebug("All paratemers are setted");
-            }
-        };
-
-        comPortsComboBox.addActionListener(listener);
-        baudRateComboBox.addActionListener(listener);
-        dataBitsComboBox.addActionListener(listener);
-        parityComboBox.addActionListener(listener);
-        stopBitsComboBox.addActionListener(listener);
 
         JPanel settingsPanel = new JPanel(new BorderLayout());
         JPanel labelPanel = new JPanel(new GridLayout(rows.length, 1));
@@ -74,6 +62,17 @@ public class DebugControlBlock extends JPanel {
             }
         }
 
+        ActionListener listener = event -> {
+            if (isAllFieldsNonEmpty()) {
+                connectButton.setEnabled(true);
+                writeToDebug("All paratemers are setted");
+            }
+        };
+
+        for (Component element : comboBoxPanel.getComponents()) {
+            ((JComboBox<?>)element).addActionListener(listener);
+        }
+
         connectButton = new JButton();
         connectButton.setText("Connect");
         connectButton.setEnabled(false);
@@ -86,22 +85,19 @@ public class DebugControlBlock extends JPanel {
                             (StopBitsEnum) stopBitsComboBox.getSelectedItem(),
                             (ParityEnum) parityComboBox.getSelectedItem());
                     mediator.enableFormatting();
-                    comPortsComboBox.setEditable(false);
-                    baudRateComboBox.setEditable(false);
-                    dataBitsComboBox.setEditable(false);
-                    stopBitsComboBox.setEditable(false);
-                    parityComboBox.setEditable(false);
+                    for (Component element : comboBoxPanel.getComponents()) {
+                        element.setEnabled(false);
+                    }
                     connectButton.setText("Disconnect");
                     writeToDebug("Connect was established");
                 }
             } else if (connectButton.getText().equals("Disconnect")) {
                 mediator.closePort();
                 mediator.disableFormatting();
-                comPortsComboBox.setSelectedItem(null);
-                baudRateComboBox.setSelectedItem(null);
-                dataBitsComboBox.setSelectedItem(null);
-                parityComboBox.setSelectedItem(null);
-                stopBitsComboBox.setSelectedItem(null);
+                for (Component element : comboBoxPanel.getComponents()) {
+                    element.setEnabled(true);
+                    ((JComboBox<?>)element).setSelectedItem(null);
+                }
                 connectButton.setText("Connect");
                 connectButton.setEnabled(false);
                 writeToDebug("Set all parameters to be able to connect to com port");
@@ -139,6 +135,4 @@ public class DebugControlBlock extends JPanel {
     public void writeToDebug(String info) {
         debugLine.writeToField(info);
     }
-
-
 }
