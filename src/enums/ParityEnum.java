@@ -1,23 +1,17 @@
 package enums;
 
 public enum ParityEnum {
-    PARITY_NO("NONE", 0), PARTITY_ODD("0DD", 1),
-    PARITY_EVEN("EVEN", 2), PARITY_MARK("MARK", 3),
-    PARITY_SPACE("SPACE", 4);
+    PARITY_NO( 0), PARTITY_ODD( 1),
+    PARITY_EVEN( 2), PARITY_MARK( 3),
+    PARITY_SPACE( 4);
 
     private final int value;
-    private final String name;
 
-    private ParityEnum(String name, int value) {
-        this.name = name;
+    private ParityEnum(int value) {
         this.value = value;
     }
 
     public int getValue() {
         return value;
-    }
-
-    public String getName() {
-        return name;
     }
 }

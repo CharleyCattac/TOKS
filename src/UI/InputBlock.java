@@ -2,8 +2,6 @@ package UI;
 
 import services.Mediator;
 
-import javax.swing.*;
-import javax.swing.text.Caret;
 import java.awt.*;
 import java.awt.event.*;
 
@@ -13,25 +11,20 @@ public class InputBlock extends ElementBlock {
 
     public InputBlock(Mediator mediator, String labelName,
                       int textFieldWidth, int textFieldHeight) {
-        super(mediator, labelName, textFieldWidth, textFieldHeight);
+        super(labelName, textFieldWidth, textFieldHeight);
 
         getTextField().setEditable(false);
-        getTextField().getCaret().setVisible(true);
-
-        String[] keys = {"UP", "DOWN", "LEFT", "RIGHT", "DELETE", "BACK_SPACE", "CONTROL"};
-        InputMap inputMap = getTextField().getInputMap();
-        for (String key : keys) {
-            inputMap.put(KeyStroke.getKeyStroke(key), "none");
-        }
-        inputMap.put(KeyStroke.getKeyStroke("CONTROL"), "none");
+        getTextField().getCaret().setVisible(false);
 
         getTextField().addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 getTextField().setEditable(true);
-                getTextField().setCaretColor(Color.BLACK);
+                getTextField().getCaret().setVisible(true);
+                getTextField().setCaretPosition(lastPositionInFile - 1);
             }
 
             public void focusLost(FocusEvent e) {
+                getTextField().getCaret().setVisible(false);
                 getTextField().setEditable(false);
             }
         });
@@ -66,7 +59,7 @@ public class InputBlock extends ElementBlock {
         getTextField().addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (getTextField().isFocusable()) {
+                if (getTextField().isFocusable() && getTextField().isEditable()) {
                     if (e.getKeyChar() == '\b') {
                         if (lastPositionInFile > 1) {
                             lastPositionInFile--;
@@ -80,6 +73,14 @@ public class InputBlock extends ElementBlock {
 
             @Override
             public void keyPressed(KeyEvent e) {
+                if (e.getKeyCode() == KeyEvent.VK_BACK_SPACE ||
+                    e.getKeyCode() == KeyEvent.VK_DELETE ||
+                    e.getKeyCode() == KeyEvent.VK_UP ||
+                    e.getKeyCode() == KeyEvent.VK_DOWN ||
+                    e.getKeyCode() == KeyEvent.VK_LEFT ||
+                    e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                        e.consume();
+                }
             }
 
             @Override

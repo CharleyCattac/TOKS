@@ -15,7 +15,6 @@ public class Mediator {
     private DebugControlBlock debugControlBlock;
     private COMport aCOMport;
 
-
     public Mediator() {
          String[] fields = {
                 "Com ports",
@@ -25,7 +24,7 @@ public class Mediator {
                 "Stop bit"
         };
         inputBlock = new InputBlock(this, "Input   ", 40, 6);
-        outputBlock = new ElementBlock(this, "Output", 40, 6);
+        outputBlock = new ElementBlock("Output", 40, 6);
         debugControlBlock = new DebugControlBlock(this, fields);
         aCOMport = new COMport(this);
     }

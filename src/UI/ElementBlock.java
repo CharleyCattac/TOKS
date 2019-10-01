@@ -1,24 +1,20 @@
 package UI;
 
-import services.Mediator;
-
 import javax.swing.*;
 import java.awt.*;
 
 public class ElementBlock extends JPanel {
 
-    private Mediator mediator;
     private JPanel labelPanel;
     private JPanel textPanel;
     private JTextArea textField;
     private JLabel label;
     private JPanel sequencePanel;
 
-    public ElementBlock(Mediator mediator, String labelName,
+    public ElementBlock(String labelName,
                         int textFieldWidth, int textFieldHeight) {
         super(new BorderLayout());
 
-        this.mediator = mediator;
         labelPanel = new JPanel(new GridLayout(1, 1));
         textPanel = new JPanel((new GridLayout(1, 1)));
         add(labelPanel, BorderLayout.WEST);

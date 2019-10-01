@@ -1,6 +1,5 @@
 package UI;
 
-import javafx.scene.control.ComboBox;
 import services.DebugLine;
 import services.Mediator;
 import enums.*;
@@ -8,7 +7,6 @@ import jssc.SerialPortList;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class DebugControlBlock extends JPanel {
@@ -65,7 +63,7 @@ public class DebugControlBlock extends JPanel {
         ActionListener listener = event -> {
             if (isAllFieldsNonEmpty()) {
                 connectButton.setEnabled(true);
-                writeToDebug("All paratemers are setted");
+                writeToDebug("All parameters are set");
             }
         };
 
