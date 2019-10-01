@@ -21,14 +21,15 @@ public class Mediator {
     };
 
     public Mediator() {
-        inputBlock = new ElementBlock("Input   ", 40, 6);
-        outputBlock = new ElementBlock("Output", 40, 6);
+        inputBlock = new ElementBlock(this, "Input   ", 40, 6);
+        outputBlock = new ElementBlock(this, "Output", 40, 6);
         debugControlBlock = new DebugControlBlock(this, fields);
-        aCOMport = new COMport();
+        aCOMport = new COMport(this);
     }
 
     public void openPort(String portName, BaudRateEnum baudRate, DataBitsEnum dataBits,
                          StopBitsEnum stopBits, ParityEnum parityMode) {
+        System.out.println(portName);
         aCOMport.initializePort(portName, baudRate.getValue(), dataBits.getValue(),
                 stopBits.getValue(), parityMode.getValue());
     }
@@ -43,6 +44,15 @@ public class Mediator {
 
     public void disableFormatting() {
         inputBlock.getTextField().setFocusable(false);
+    }
+
+    public void writeData(String data) {
+        outputBlock.getTextField().append(data);
+    }
+
+    public void transferData(char data) {
+        String string = "" + data;
+        aCOMport.sendMessage(string);
     }
 
     public ElementBlock getInputBlock() {

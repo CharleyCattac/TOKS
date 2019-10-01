@@ -2,14 +2,12 @@ package UI;
 
 import COM_port.Mediator;
 import enums.*;
-import jssc.SerialPort;
 import jssc.SerialPortList;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.LinkedList;
 
 public class DebugControlBlock extends JPanel {
 
@@ -84,17 +82,17 @@ public class DebugControlBlock extends JPanel {
 //                        System.out.println(((DataBitsEnum)dataBitsComboBox.getSelectedItem()).getValue());
 //                        System.out.println(((StopBitsEnum)stopBitsComboBox.getSelectedItem()).getValue());
 //                        System.out.println(((ParityEnum)parityComboBox.getSelectedItem()).getValue());
+                        mediator.openPort((String)comPortsComboBox.getSelectedItem(),
+                                (BaudRateEnum)baudRateComboBox.getSelectedItem(),
+                                (DataBitsEnum)dataBitsComboBox.getSelectedItem(),
+                                (StopBitsEnum)stopBitsComboBox.getSelectedItem(),
+                                (ParityEnum)parityComboBox.getSelectedItem());
                         mediator.enableFormatting();
                         comPortsComboBox.setEditable(false);
                         baudRateComboBox.setEditable(false);
                         dataBitsComboBox.setEditable(false);
                         stopBitsComboBox.setEditable(false);
                         parityComboBox.setEditable(false);
-//                        mediator.openPort(comPortsComboBox.getName(),
-//                                (BaudRateEnum)baudRateComboBox.getSelectedItem(),
-//                                (DataBitsEnum)dataBitsComboBox.getSelectedItem(),
-//                                (StopBitsEnum)stopBitsComboBox.getSelectedItem(),
-//                                (ParityEnum)parityComboBox.getSelectedItem());
                         connectButton.setText("Disconnect");
                     } else if (connectButton.getText().equals("Disconnect")) {
                         mediator.closePort();

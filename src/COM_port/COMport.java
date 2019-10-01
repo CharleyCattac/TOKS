@@ -5,9 +5,15 @@ import jssc.*;
 public class COMport {
 
     private static SerialPort serialPort;
+    private Mediator mediator;
+
+    public COMport(Mediator mediator) {
+        this.mediator = mediator;
+    }
 
     public void initializePort(String portName, int baudRate, int dataBits,
                                int stopBits, int parityMode) {
+        System.out.println(portName);
         serialPort = new SerialPort(portName);
 
         try {
@@ -20,13 +26,7 @@ public class COMport {
             serialPort.setFlowControlMode(SerialPort.FLOWCONTROL_RTSCTS_IN |
                                           SerialPort.FLOWCONTROL_RTSCTS_OUT);
 
-//            serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
-
-
-            serialPort.writeBytes("Test".getBytes());
-            byte[] buffer = serialPort.readBytes(10);
-            serialPort.closePort();
-
+            serialPort.addEventListener(new PortReader(), SerialPort.MASK_RXCHAR);
         }
         catch (SerialPortException ex) {
             ex.printStackTrace();
@@ -34,19 +34,32 @@ public class COMport {
     }
 
     public void closePort() {
+        try {
+            if (serialPort.closePort()) {
+                serialPort = null;
+            }
+        }
+        catch (SerialPortException ex) {}
         System.out.println("I close port");
     }
 
-    private static class PortReader implements SerialPortEventListener {
+    public void sendMessage(String data) {
+        try {
+            serialPort.writeBytes(data.getBytes());
+        }
+        catch (SerialPortException ex) {
+            ex.printStackTrace();
+        }
+    }
 
+    private class PortReader implements SerialPortEventListener {
+        @Override
         public void serialEvent(SerialPortEvent event) {
-            if (event.isRXCHAR() && event.getEventValue() == 10) {
+            if (event.isRXCHAR() && event.getEventValue() > 0) {
                 try {
                     String data = serialPort.readString(event.getEventValue());
+                    mediator.writeData(data);
                     System.out.println(data);
-                    byte buffer[] = serialPort.readBytes(10);
-                    System.out.println(buffer.toString());
-                    serialPort.writeString("Get data");
                 }
                 catch (SerialPortException ex) {
                     ex.printStackTrace();

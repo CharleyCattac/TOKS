@@ -5,21 +5,16 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport$PortReader.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport$PortReader.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/Mediator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/DebugControlBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/DebugControlBlock.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock$3.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/MyEnums.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/MyEnums.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/ParityEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/ParityEnum.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/StopBitsEnum.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/StopBitsEnum.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/COM_port/COMport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/COM_port/COMport.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/COM_port/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/COM_port/Mediator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/DebugControlBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/DebugControlBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/ElementBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/ElementBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/MyEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/MyEnums.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/ParityEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/ParityEnum.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/StopBitsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/StopBitsEnum.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -44,11 +39,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UI/DebugControlBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-395">
-              <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+            <state relative-caret-position="640">
+              <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -86,8 +81,12 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/COM_port/COMport.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="172">
-              <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
+            <state relative-caret-position="91">
+              <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+              <folding>
+                <element signature="e#171#172#0" expanded="true" />
+                <element signature="e#190#191#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -101,11 +100,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/UI/ElementBlock.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="277">
-              <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+            <state relative-caret-position="284">
+              <caret line="76" column="28" lean-forward="true" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#3195#3196#0" expanded="true" />
@@ -118,8 +117,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/UI/MainWindow.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="145">
-              <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+            <state relative-caret-position="213">
+              <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,8 +129,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/COM_port/Mediator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="294">
-              <caret line="42" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="207">
+              <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#923#924#0" expanded="true" />
@@ -140,6 +139,8 @@
                 <element signature="e#1231#1232#0" expanded="true" />
                 <element signature="e#1279#1280#0" expanded="true" />
                 <element signature="e#1299#1300#0" expanded="true" />
+                <element signature="e#1395#1396#0" expanded="true" />
+                <element signature="e#1452#1453#0" expanded="true" />
                 <element signature="e#649#650#0" expanded="true" />
                 <element signature="e#682#683#0" expanded="true" />
                 <element signature="e#726#727#0" expanded="true" />
@@ -162,6 +163,14 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>lastPosition</find>
+    </findStrings>
+    <replaceStrings>
+      <replace>lastPositionInFile</replace>
+    </replaceStrings>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
@@ -173,11 +182,11 @@
         <option value="$PROJECT_DIR$/src/Mediator.java" />
         <option value="$PROJECT_DIR$/src/UI/MainWindow.java" />
         <option value="$PROJECT_DIR$/src/enums/ParityEnum.java" />
-        <option value="$PROJECT_DIR$/src/COM_port/COMport.java" />
         <option value="$PROJECT_DIR$/src/enums/StopBitsEnum.java" />
         <option value="$PROJECT_DIR$/src/enums/MyEnums.java" />
-        <option value="$PROJECT_DIR$/src/COM_port/Mediator.java" />
         <option value="$PROJECT_DIR$/src/UI/ElementBlock.java" />
+        <option value="$PROJECT_DIR$/src/COM_port/COMport.java" />
+        <option value="$PROJECT_DIR$/src/COM_port/Mediator.java" />
         <option value="$PROJECT_DIR$/src/UI/DebugControlBlock.java" />
       </list>
     </option>
@@ -230,7 +239,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569883677856" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569888677693" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -252,27 +261,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.ApplicationRunner">
-    <configuration name="ApplicationRunner" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+  <component name="RunManager">
+    <configuration name="ApplicationRunner" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="ApplicationRunner" />
       <module name="TOKS_laba1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="COMport" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="COM_port.COMport" />
+    <configuration name="ApplicationRunner" type="Application" factoryName="Application" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="ApplicationRunner" />
       <module name="TOKS_laba1" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <recent_temporary>
-      <list>
-        <item itemvalue="Application.ApplicationRunner" />
-        <item itemvalue="Application.COMport" />
-      </list>
-    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -290,12 +293,12 @@
       <workItem from="1569746996957" duration="12323000" />
       <workItem from="1569799475045" duration="1211000" />
       <workItem from="1569845706409" duration="1120000" />
-      <workItem from="1569846889059" duration="19821000" />
+      <workItem from="1569846889059" duration="24647000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="20941000" />
+    <option name="totallyTimeSpent" value="25767000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -310,7 +313,7 @@
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25340393" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -319,7 +322,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.3289689" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -422,10 +425,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/UI/MainWindow.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="213">
+          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/COM_port/COMport.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="91">
+          <caret line="15" column="37" selection-start-line="15" selection-start-column="37" selection-end-line="15" selection-end-column="37" />
+          <folding>
+            <element signature="e#171#172#0" expanded="true" />
+            <element signature="e#190#191#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/COM_port/Mediator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="294">
-          <caret line="42" selection-start-line="42" selection-end-line="42" />
+        <state relative-caret-position="207">
+          <caret line="31" column="37" selection-start-line="31" selection-start-column="37" selection-end-line="31" selection-end-column="37" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#923#924#0" expanded="true" />
@@ -434,6 +458,8 @@
             <element signature="e#1231#1232#0" expanded="true" />
             <element signature="e#1279#1280#0" expanded="true" />
             <element signature="e#1299#1300#0" expanded="true" />
+            <element signature="e#1395#1396#0" expanded="true" />
+            <element signature="e#1452#1453#0" expanded="true" />
             <element signature="e#649#650#0" expanded="true" />
             <element signature="e#682#683#0" expanded="true" />
             <element signature="e#726#727#0" expanded="true" />
@@ -444,41 +470,24 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/MainWindow.java">
+    <entry file="file://$PROJECT_DIR$/src/UI/DebugControlBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="145">
-          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+        <state relative-caret-position="640">
+          <caret line="80" column="41" lean-forward="true" selection-start-line="80" selection-start-column="41" selection-end-line="80" selection-end-column="41" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/COM_port/COMport.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="172">
-          <caret line="18" lean-forward="true" selection-start-line="18" selection-end-line="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/UI/ElementBlock.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="277">
-          <caret line="29" column="44" lean-forward="true" selection-start-line="29" selection-start-column="44" selection-end-line="29" selection-end-column="44" />
+        <state relative-caret-position="284">
+          <caret line="76" column="28" lean-forward="true" selection-start-line="76" selection-start-column="28" selection-end-line="76" selection-end-column="28" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#3195#3196#0" expanded="true" />
             <element signature="e#3227#3228#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/UI/DebugControlBlock.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-395">
-          <caret line="78" column="40" lean-forward="true" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
-          <folding>
-            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

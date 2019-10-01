@@ -1,20 +1,26 @@
 package UI;
 
+import COM_port.Mediator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 public class ElementBlock extends JPanel {
 
+    private Mediator mediator;
     private JPanel labelPanel;
     private JPanel textPanel;
     private JTextArea textField;
     private JLabel label;
-    JPanel sequencePanel;
-    int lastPosition = 1;
+    private JPanel sequencePanel;
+    private int lastPositionInFile = 1;
 
-    public ElementBlock(String labelName, int textFieldWidth, int textFieldHeight) {
+    public ElementBlock(Mediator mediator, String labelName,
+                        int textFieldWidth, int textFieldHeight) {
         super(new BorderLayout());
+
+        this.mediator = mediator;
         labelPanel = new JPanel(new GridLayout(1, 1));
         textPanel = new JPanel((new GridLayout(1, 1)));
         add(labelPanel, BorderLayout.WEST);
@@ -42,13 +48,13 @@ public class ElementBlock extends JPanel {
 
             @Override
             public void mousePressed(java.awt.event.MouseEvent e) {
-                textField.setCaretPosition(lastPosition - 1);
+                textField.setCaretPosition(lastPositionInFile - 1);
                 textField.setEditable(false);
             }
 
             @Override
             public void mouseReleased(java.awt.event.MouseEvent e) {
-                textField.setCaretPosition(lastPosition - 1);
+                textField.setCaretPosition(lastPositionInFile - 1);
                 textField.setEditable(true);
             }
 
@@ -65,13 +71,15 @@ public class ElementBlock extends JPanel {
             public void keyTyped(KeyEvent e) {
                 if (textField.isEditable()) {
                     if (e.getKeyChar() == '\b') {
-                        if (lastPosition > 1) {
-                            lastPosition--;
+                        if (lastPositionInFile > 1) {
+                            lastPositionInFile--;
                         }
                     } else {
-                        lastPosition++;
+                        mediator.transferData(e.getKeyChar());
+//                        System.out.println(e.getKeyChar());
+                        lastPositionInFile++;
                     }
-                    System.out.println(lastPosition);
+//                    System.out.println(lastPositionInFile);
                 }
             }
 
