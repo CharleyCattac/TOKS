@@ -11,7 +11,7 @@ public class MainWindow {
     public void Application() {
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         mainWindow.setTitle("COM messenger");
-        mainWindow.setSize(500, 410);
+        mainWindow.setSize(500, 430);
         mainWindow.setLocationRelativeTo(null);
 
         Mediator mediator = new Mediator();

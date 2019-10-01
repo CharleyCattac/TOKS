@@ -13,7 +13,6 @@ public class COMport {
 
     public void initializePort(String portName, int baudRate, int dataBits,
                                int stopBits, int parityMode) {
-        System.out.println(portName);
         serialPort = new SerialPort(portName);
 
         try {
@@ -30,6 +29,7 @@ public class COMport {
         }
         catch (SerialPortException ex) {
             ex.printStackTrace();
+            mediator.writeToDebug("Couldn't open port");
         }
     }
 
@@ -39,8 +39,9 @@ public class COMport {
                 serialPort = null;
             }
         }
-        catch (SerialPortException ex) {}
-        System.out.println("I close port");
+        catch (SerialPortException ex) {
+            mediator.writeToDebug("Couldn't close port!!!");
+        }
     }
 
     public void sendMessage(String data) {
@@ -49,6 +50,7 @@ public class COMport {
         }
         catch (SerialPortException ex) {
             ex.printStackTrace();
+            mediator.writeToDebug("Trying to send data was failed!!!");
         }
     }
 
@@ -63,6 +65,7 @@ public class COMport {
                 }
                 catch (SerialPortException ex) {
                     ex.printStackTrace();
+                    mediator.writeToDebug("Trying to read message was unsuccessful!!!");
                 }
             }
             else if (event.isCTS()) {

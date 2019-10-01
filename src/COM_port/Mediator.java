@@ -29,7 +29,6 @@ public class Mediator {
 
     public void openPort(String portName, BaudRateEnum baudRate, DataBitsEnum dataBits,
                          StopBitsEnum stopBits, ParityEnum parityMode) {
-        System.out.println(portName);
         aCOMport.initializePort(portName, baudRate.getValue(), dataBits.getValue(),
                 stopBits.getValue(), parityMode.getValue());
     }
@@ -53,6 +52,10 @@ public class Mediator {
     public void transferData(char data) {
         String string = "" + data;
         aCOMport.sendMessage(string);
+    }
+
+    public void writeToDebug(String data) {
+        debugControlBlock.writeToDebug(data);
     }
 
     public ElementBlock getInputBlock() {

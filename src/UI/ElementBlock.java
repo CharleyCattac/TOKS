@@ -6,6 +6,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+import static java.lang.Character.CONTROL;
+
 public class ElementBlock extends JPanel {
 
     private Mediator mediator;
@@ -31,14 +33,21 @@ public class ElementBlock extends JPanel {
         textField.setRows(textFieldHeight);
         textField.setAutoscrolls(true);
         textField.setLineWrap(true);
+
+        String[] keys = {"UP", "DOWN", "LEFT", "RIGHT", "DELETE", "BACK_SPACE", "CONTROL" };
+        InputMap inputMap = textField.getInputMap();
+        for (String key : keys) {
+            inputMap.put(KeyStroke.getKeyStroke(key), "none");
+        }
+        inputMap.put(KeyStroke.getKeyStroke("CONTROL"), "none");
         textField.addFocusListener(new FocusListener() {
             public void focusGained(FocusEvent e) {
                 textField.setEditable(true);
-                System.out.println("Focus is gotten");
+//                System.out.println("Focus is gotten");
             }
             public void focusLost(FocusEvent e) {
                 textField.setEditable(false);
-                System.out.println("Focus is lost");
+//                System.out.println("Focus is lost");
             }
         });
         textField.addMouseListener(new MouseListener() {
@@ -69,7 +78,7 @@ public class ElementBlock extends JPanel {
         textField.addKeyListener(new KeyListener() {
             @Override
             public void keyTyped(KeyEvent e) {
-                if (textField.isEditable()) {
+                if (textField.isFocusable()) {
                     if (e.getKeyChar() == '\b') {
                         if (lastPositionInFile > 1) {
                             lastPositionInFile--;
@@ -94,8 +103,8 @@ public class ElementBlock extends JPanel {
             }
         });
 
-            textField.setFocusable(false);
-            textField.setEditable(false);
+        textField.setFocusable(false);
+        textField.setEditable(false);
 
         JScrollPane sp = new JScrollPane(textField);
         sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);

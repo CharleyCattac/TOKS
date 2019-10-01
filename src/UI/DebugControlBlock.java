@@ -23,6 +23,7 @@ public class DebugControlBlock extends JPanel {
             new JComboBox<>(StopBitsEnum.values());
     private JButton connectButton;
     private Mediator mediator;
+    private DebugLine debugLine = new DebugLine();
     private JLabel[] labels;
 
     public DebugControlBlock(Mediator mediator, String[] rows) {
@@ -32,6 +33,7 @@ public class DebugControlBlock extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 if (isAllFieldsNonEmpty()) {
                     connectButton.setEnabled(true);
+                    writeToDebug("All parameters are setted");
                 }
             }
         };
@@ -43,12 +45,16 @@ public class DebugControlBlock extends JPanel {
         stopBitsComboBox.addActionListener(listener);
 
         this.mediator = mediator;
+        JPanel settingsPanel = new JPanel(new BorderLayout());
         JPanel labelPanel = new JPanel(new GridLayout(rows.length, 1));
         JPanel comboBoxPanel = new JPanel((new GridLayout(rows.length, 1)));
-        JPanel buttonPanel = new JPanel();
-        add(labelPanel, BorderLayout.WEST);
-        add(comboBoxPanel, BorderLayout.EAST);
-        add(buttonPanel, BorderLayout.AFTER_LAST_LINE);
+        settingsPanel.add(labelPanel, BorderLayout.WEST);
+        settingsPanel.add(comboBoxPanel, BorderLayout.EAST);
+        JPanel buttonPanel = new JPanel(new BorderLayout());
+
+        add(settingsPanel, BorderLayout.PAGE_START);
+        add(buttonPanel, BorderLayout.CENTER);
+        add(debugLine.getField(), BorderLayout.PAGE_END);
 
         for(int i = 0; i < rows.length; i++) {
             JLabel label = new JLabel(rows[i], JLabel.RIGHT);
@@ -77,23 +83,26 @@ public class DebugControlBlock extends JPanel {
         connectButton.setEnabled(false);
         connectButton.addActionListener((event) -> {
                     if (connectButton.getText().equals("Connect")) {
+                        if (isValidate()) {
 //                        System.out.println((String)comPortsComboBox.getSelectedItem());
 //                        System.out.println(((BaudRateEnum)baudRateComboBox.getSelectedItem()).getValue());
 //                        System.out.println(((DataBitsEnum)dataBitsComboBox.getSelectedItem()).getValue());
 //                        System.out.println(((StopBitsEnum)stopBitsComboBox.getSelectedItem()).getValue());
 //                        System.out.println(((ParityEnum)parityComboBox.getSelectedItem()).getValue());
-                        mediator.openPort((String)comPortsComboBox.getSelectedItem(),
-                                (BaudRateEnum)baudRateComboBox.getSelectedItem(),
-                                (DataBitsEnum)dataBitsComboBox.getSelectedItem(),
-                                (StopBitsEnum)stopBitsComboBox.getSelectedItem(),
-                                (ParityEnum)parityComboBox.getSelectedItem());
-                        mediator.enableFormatting();
-                        comPortsComboBox.setEditable(false);
-                        baudRateComboBox.setEditable(false);
-                        dataBitsComboBox.setEditable(false);
-                        stopBitsComboBox.setEditable(false);
-                        parityComboBox.setEditable(false);
-                        connectButton.setText("Disconnect");
+                            mediator.openPort((String) comPortsComboBox.getSelectedItem(),
+                                    (BaudRateEnum) baudRateComboBox.getSelectedItem(),
+                                    (DataBitsEnum) dataBitsComboBox.getSelectedItem(),
+                                    (StopBitsEnum) stopBitsComboBox.getSelectedItem(),
+                                    (ParityEnum) parityComboBox.getSelectedItem());
+                            mediator.enableFormatting();
+                            comPortsComboBox.setEditable(false);
+                            baudRateComboBox.setEditable(false);
+                            dataBitsComboBox.setEditable(false);
+                            stopBitsComboBox.setEditable(false);
+                            parityComboBox.setEditable(false);
+                            connectButton.setText("Disconnect");
+                            writeToDebug("Connect was established");
+                        }
                     } else if (connectButton.getText().equals("Disconnect")) {
                         mediator.closePort();
                         mediator.disableFormatting();
@@ -104,12 +113,11 @@ public class DebugControlBlock extends JPanel {
                         stopBitsComboBox.setSelectedItem(null);
                         connectButton.setText("Connect");
                         connectButton.setEnabled(false);
+                        writeToDebug("Set all parameters to be able to connect to com port");
                     }
                 });
         buttonPanel.add(connectButton);
-//        comPortsComboBox.addActionListener(event -> {
-//            if (comPortsComboBox.getSelectedItem())
-//                }
+
 //        JLabel label = new JLabel(labelName, JLabel.RIGHT);
 //        label.setLabelFor(aJTextArea);
 //
@@ -129,5 +137,23 @@ public class DebugControlBlock extends JPanel {
         } else {
             return false;
         }
+    }
+
+    public boolean isValidate() {
+        if (((StopBitsEnum)stopBitsComboBox.getSelectedItem()).getValue() == 3 &&
+                ((DataBitsEnum)dataBitsComboBox.getSelectedItem()).getValue() != 5) {
+            writeToDebug("It's forbidden to use 1,5 stop bits not with 5 data bits");
+            return false;
+        }
+        if (((StopBitsEnum)stopBitsComboBox.getSelectedItem()).getValue() == 2 &&
+                ((DataBitsEnum)dataBitsComboBox.getSelectedItem()).getValue() == 5) {
+            writeToDebug("It's forbidden to use 2 stop bits with 5 data bits");
+            return false;
+        }
+        return true;
+    }
+
+    public void writeToDebug(String info) {
+        debugLine.writeToField(info);
     }
 }
