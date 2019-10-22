@@ -1,12 +1,12 @@
 package enums;
 
-public enum DataBitsEnum {
-    DATABITS_5(5), DATABITS_6(6),
-    DATABITS_7(7), DATABITS_8(8);
+public enum StopBits {
+    STOPBITS_1(1), STOPBITS_1_5(3),
+    STOPBITS_2(2);
 
     private final int value;
 
-    private DataBitsEnum(int value) {
+    private StopBits(int value) {
         this.value = value;
     }
 

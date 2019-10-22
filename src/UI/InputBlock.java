@@ -5,7 +5,7 @@ import services.Mediator;
 import java.awt.*;
 import java.awt.event.*;
 
-public class InputBlock extends ElementBlock {
+public class InputBlock extends OutputBlock {
 
     private int lastPositionInFile = 1;
 

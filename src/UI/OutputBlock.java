@@ -3,7 +3,7 @@ package UI;
 import javax.swing.*;
 import java.awt.*;
 
-public class ElementBlock extends JPanel {
+public class OutputBlock extends JPanel {
 
     private JPanel labelPanel;
     private JPanel textPanel;
@@ -11,14 +11,21 @@ public class ElementBlock extends JPanel {
     private JLabel label;
     private JPanel sequencePanel;
 
-    public ElementBlock(String labelName,
-                        int textFieldWidth, int textFieldHeight) {
+    public OutputBlock(String labelName,
+                       int textFieldWidth, int textFieldHeight) {
         super(new BorderLayout());
+
+        JPanel extraPanel = new JPanel(new BorderLayout());
+        JButton extraButton = new JButton();
+        extraButton.setEnabled(false);
+        extraButton.setBorderPainted(false);
 
         labelPanel = new JPanel(new GridLayout(1, 1));
         textPanel = new JPanel((new GridLayout(1, 1)));
-        add(labelPanel, BorderLayout.WEST);
-        add(textPanel, BorderLayout.CENTER);
+        extraPanel.add(labelPanel, BorderLayout.WEST);
+        extraPanel.add(textPanel, BorderLayout.CENTER);
+        add(extraButton, BorderLayout.WEST);
+        add(extraPanel, BorderLayout.CENTER);
 
         textField = new JTextArea();
         textField.setColumns(textFieldWidth);
@@ -37,6 +44,10 @@ public class ElementBlock extends JPanel {
         sequencePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         sequencePanel.add(sp);
         textPanel.add(sequencePanel);
+
+        extraButton.setBackground(Color.PINK);
+        labelPanel.setBackground(Color.PINK);
+        sequencePanel.setBackground(Color.PINK);
     }
 
     public JTextArea getTextField() {

@@ -2,10 +2,10 @@ package services;
 
 import javax.swing.*;
 
-public class DebugLine {
+public class InfoLine {
     private JTextField field = new JTextField();
 
-    public DebugLine() {
+    public InfoLine() {
         field.setFocusable(false);
         field.setHorizontalAlignment(0);
     }

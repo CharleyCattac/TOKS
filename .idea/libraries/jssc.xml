@@ -1,20 +1,10 @@
 <component name="libraryTable">
-  <library name="jssc">
+  <library name="jssc" type="repository">
+    <properties maven-id="org.scream3r:jssc:2.8.0" />
     <CLASSES>
-      <root url="jar://D:/Java/Libraries/jSSC-2.7.0-Release/jssc.jar!/" />
-      <root url="file://D:/Java/Libraries/javafx-sdk-11.0.2/lib" />
-      <root url="jar://$USER_HOME$/Documents/Java_libraries/jSSC-2.7.0-Release/jssc.jar!/" />
+      <root url="jar://$MAVEN_REPOSITORY$/org/scream3r/jssc/2.8.0/jssc-2.8.0.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <NATIVE>
-      <root url="file://$USER_HOME$/Documents/JavaFX/javafx-sdk-11.0.2/lib" />
-    </NATIVE>
-    <SOURCES>
-      <root url="file://D:/Java/Libraries/javafx-sdk-11.0.2/lib" />
-      <root url="file://$USER_HOME$/Documents/JavaFX/javafx-sdk-11.0.2/lib" />
-    </SOURCES>
-    <jarDirectory url="file://D:/Java/Libraries/javafx-sdk-11.0.2/lib" recursive="false" />
-    <jarDirectory url="file://$USER_HOME$/Documents/JavaFX/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
-    <jarDirectory url="file://D:/Java/Libraries/javafx-sdk-11.0.2/lib" recursive="false" type="SOURCES" />
+    <SOURCES />
   </library>
 </component>

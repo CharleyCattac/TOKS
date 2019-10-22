@@ -1,6 +1,6 @@
 package enums;
 
-public enum BaudRateEnum {
+public enum BaudRate {
 
     BAUDRATE_110(110), BAUDRATE_300(300),
     BAUDRATE_600(600), BAUDRATE_1200(1200),
@@ -11,7 +11,7 @@ public enum BaudRateEnum {
 
     private final int value;
 
-    private BaudRateEnum(int value){
+    private BaudRate(int value){
         this.value = value;
     }
 
