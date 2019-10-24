@@ -6,42 +6,12 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="upd">
-      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TOKS_laba1_jar.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/jssc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/jssc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport$PortReader.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/COM_port/COMport.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/META-INF/TOKS_laba1.kotlin_module" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/META-INF/TOKS_laba1.kotlin_module" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/DebugControlBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/ElementBlock.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/BaudRateEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/DataBitsEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/MyEnums.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/ParityEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/enums/StopBitsEnum.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/DebugLine.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/COM_port/COMport.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/ComPort.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/DebugControlBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/ElementBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/OutputBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/InputBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/InputBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/MainWindow.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/BaudRateEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/BaudRate.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/DataBitsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/DataBits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/MyEnums.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Params.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/ParityEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Parity.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/StopBitsEnum.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/StopBits.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/DebugLine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/InfoLine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -141,8 +111,18 @@
       <workItem from="1570986347094" duration="8855000" />
       <workItem from="1570997009949" duration="7816000" />
       <workItem from="1571139706677" duration="2155000" />
-      <workItem from="1571747224166" duration="7137000" />
+      <workItem from="1571747224166" duration="7163000" />
+      <workItem from="1571864727034" duration="4119000" />
+      <workItem from="1571915865770" duration="2069000" />
     </task>
+    <task id="LOCAL-00001" summary="upd">
+      <created>1571782604544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1571782604544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TodoView">
@@ -185,6 +165,7 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <option name="LAST_COMMIT_MESSAGE" value="" />
+    <MESSAGE value="upd" />
+    <option name="LAST_COMMIT_MESSAGE" value="upd" />
   </component>
 </project>

@@ -56,7 +56,8 @@ public class Mediator {
             sourceCode = Integer.parseInt(source);
             destinationCode = Integer.parseInt(destination);
             if (sourceCode < 0 || sourceCode > 255 ||
-                    destinationCode < 0 || destinationCode > 255)
+                    destinationCode < 0 || destinationCode > 255 ||
+                sourceCode == destinationCode)
                 throw new SerialPortException("Oops", "I", "Did it again");
             errorEmul = error;
         } catch (Exception ex){
@@ -81,25 +82,8 @@ public class Mediator {
 
     public void outputData(String rawPackage) {
         String unparsedPackage = PackageManager.unparsePackage(rawPackage);
-        /*
-        char inFlag = Integer.parseInt(rawPackage.substring(0, rawPackage.indexOf("_")));
-        System.out.println(inFlag);
-        if (--inFlag != flag){
-            sendInfoMessage("Error!");
-            return;
-        }
-        String noErrorPackage = rawPackage.substring(rawPackage.indexOf("_") + 1);
-        int dest = Integer.parseInt(noErrorPackage.substring(0, rawPackage.indexOf("_")));
-        if (dest != sourceCode)
-            return;
-        outputBlock.getTextField().append(noErrorPackage.substring(rawPackage.indexOf("_") + 1));
-        sendInfoMessage(rawPackage);
-         */
-        //int dest = Integer.parseInt(rawPackage.substring(0, rawPackage.indexOf("_")));
-        //if (dest != sourceCode)
-        //    return;
-        outputBlock.getTextField().append(rawPackage.substring(rawPackage.indexOf("_") + 1));
-        sendInfoMessage(rawPackage);
+        outputBlock.getTextField().append(unparsedPackage);
+        sendInfoMessage(PackageManager.getInfoMessage());
     }
 
     public void transferData(char data) {
@@ -109,17 +93,18 @@ public class Mediator {
         //String string = "" + data;
         comPort.sendMessage(PackageManager.parseMessage(destinationCode,
                 sourceCode, errorEmul, dataload));
+        sendInfoMessage("Package has been sent");
         clearDataload();
     }
     private boolean dataloadIsFull(){
         for (int i = 0; i < dataloadSize; i++){
-            if(dataload[i] == 0b0000_0000) return false;
+            if(dataload[i] == 0) return false;
         }
         return true;
     }
     private void putCharIntoDataload(char ch){
         for (int i = 0; i < dataloadSize; i++){
-            if(dataload[i] == 0b0000_0000) {
+            if(dataload[i] == 0) {
                 dataload[i] = ch;
                 break;
             }

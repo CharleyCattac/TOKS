@@ -11,11 +11,6 @@ import java.util.ArrayList;
 
 public class SettingsBlock extends JPanel {
 
-    //!!!!!!!!!!!!!!!!!!!!!!!!!!
-    private JTextField sourceField = new JTextField();
-    private JTextField destinationField = new JTextField();
-    private JCheckBox errorBox = new JCheckBox();
-    //!!!!!!!!!!!!!!
     private JComboBox<String> portsBox =
             new JComboBox<>(SerialPortList.getPortNames());
     private JComboBox<BaudRate> baudRateBox =
@@ -26,6 +21,11 @@ public class SettingsBlock extends JPanel {
             new JComboBox<>(Parity.values());
     private JComboBox<StopBits> stopBitsBox =
             new JComboBox<>(StopBits.values());
+
+    private JTextField sourceField = new JTextField();
+    private JTextField destinationField = new JTextField();
+    private JCheckBox errorBox = new JCheckBox();
+
     private JButton refreshButton;
     private JButton connectButton;
     private InfoLine infoLine = new InfoLine();
