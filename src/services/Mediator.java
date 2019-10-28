@@ -10,22 +10,18 @@ import enums.Parity;
 import enums.StopBits;
 import jssc.SerialPortException;
 
-import java.util.Timer;
-
 public class Mediator {
-    private final int textFieldWidth = 38;
-    private final int textFieldHeight = 6;
 
     private InputBlock inputBlock;
     private OutputBlock outputBlock;
     private SettingsBlock settingsBlock;
     private ComPort comPort;
 
-    private final int dataloadSize = PackageManager.DATALOAD_SIZE;
-    private char[] dataload = new char[dataloadSize];
+    private final int dataLoadSize = PackageManager.DATALOAD_SIZE;
+    private char[] dataLoad = new char[dataLoadSize];
     private int sourceCode = 1;
     private int destinationCode = 1;
-    private boolean errorEmul = false;
+    private boolean errorEmulation = false;
 
     public Mediator() {
          String[] fields = {
@@ -38,20 +34,14 @@ public class Mediator {
                  "Destination address",
                  "Error"
         };
+        int textFieldHeight = 6;
+        int textFieldWidth = 38;
         inputBlock = new InputBlock(this, "Input   ", textFieldWidth, textFieldHeight);
         outputBlock = new OutputBlock("Output", textFieldWidth, textFieldHeight);
         settingsBlock = new SettingsBlock(this, fields);
         comPort = new ComPort(this);
         clearDataload();
     }
-
-    /*
-    public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
-                         StopBits stopBits, Parity parityMode) throws SerialPortException{
-        comPort.initializePort(portName, baudRate.getValue(), dataBits.getValue(),
-                stopBits.getValue(), parityMode.getValue());
-    }
-     */
 
     public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
                          StopBits stopBits, Parity parityMode,
@@ -64,7 +54,7 @@ public class Mediator {
                 sourceCode == destinationCode)
                 throw new SerialPortException("Oops", "I", "Did it again");
             PackageManager.setInitialSource(sourceCode);
-            errorEmul = error;
+            errorEmulation = error;
         } catch (Exception ex){
             throw new SerialPortException("Yes", "This", "Sucks");
             //sorry not sorry
@@ -103,29 +93,28 @@ public class Mediator {
         putCharIntoDataload(data);
         if (!dataloadIsFull())
             return;
-        //String string = "" + data;
         comPort.sendMessage(PackageManager.parseMessage(destinationCode,
-                sourceCode, errorEmul, dataload));
+                sourceCode, errorEmulation, dataLoad));
         sendInfoMessage(PackageManager.getInfoMessage());
         clearDataload();
     }
     private boolean dataloadIsFull(){
-        for (int i = 0; i < dataloadSize; i++){
-            if(dataload[i] == 0) return false;
+        for (int i = 0; i < dataLoadSize; i++){
+            if(dataLoad[i] == 0) return false;
         }
         return true;
     }
     private void putCharIntoDataload(char ch){
-        for (int i = 0; i < dataloadSize; i++){
-            if(dataload[i] == 0) {
-                dataload[i] = ch;
+        for (int i = 0; i < dataLoadSize; i++){
+            if(dataLoad[i] == 0) {
+                dataLoad[i] = ch;
                 break;
             }
         }
     }
     private void clearDataload(){
-        for (int i = 0; i < dataloadSize; i++){
-            dataload[i] = 0;
+        for (int i = 0; i < dataLoadSize; i++){
+            dataLoad[i] = 0;
         }
     }
 

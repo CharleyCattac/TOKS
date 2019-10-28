@@ -39,17 +39,7 @@ public class ComPort {
         }
         catch (SerialPortException ex) {
             ex.printStackTrace();
-            mediator.sendInfoMessage("Trying to send data was failed!!!");
-        }
-    }
-
-    public void sendMessage(byte[] pack) {
-        try {
-            serialPort.writeBytes(pack);
-        }
-        catch (SerialPortException ex) {
-            ex.printStackTrace();
-            mediator.sendInfoMessage("Trying to send data was failed!!!");
+            mediator.sendInfoMessage("Attempt to send message was failed");
         }
     }
 
@@ -63,19 +53,8 @@ public class ComPort {
                 }
                 catch (SerialPortException ex) {
                     ex.printStackTrace();
-                    mediator.sendInfoMessage("Trying to read message was unsuccessful!!!");
+                    mediator.sendInfoMessage("Attempt to read message was failed");
                 }
-            }
-            else if (event.isCTS()) {
-                if (event.getEventValue() == 1) {
-                    System.out.println("CTS - ON");
-                }
-                else {
-                    System.out.println("CTS - OFF");
-                }
-            }
-            else {
-                System.out.println("DSR - OFF");
             }
         }
     }
