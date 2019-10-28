@@ -10,6 +10,8 @@ import enums.Parity;
 import enums.StopBits;
 import jssc.SerialPortException;
 
+import java.util.Timer;
+
 public class Mediator {
     private final int textFieldWidth = 38;
     private final int textFieldHeight = 6;
@@ -30,7 +32,7 @@ public class Mediator {
                 "Com ports",
                 "Baud rate",
                 "Data bits",
-                "Stop bit",
+                "Stop bits",
                  "Parity",
                  "Source address",
                  "Destination address",
@@ -43,11 +45,13 @@ public class Mediator {
         clearDataload();
     }
 
+    /*
     public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
                          StopBits stopBits, Parity parityMode) throws SerialPortException{
         comPort.initializePort(portName, baudRate.getValue(), dataBits.getValue(),
                 stopBits.getValue(), parityMode.getValue());
     }
+     */
 
     public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
                          StopBits stopBits, Parity parityMode,
@@ -59,6 +63,7 @@ public class Mediator {
                     destinationCode < 0 || destinationCode > 255 ||
                 sourceCode == destinationCode)
                 throw new SerialPortException("Oops", "I", "Did it again");
+            PackageManager.setInitialSource(sourceCode);
             errorEmul = error;
         } catch (Exception ex){
             throw new SerialPortException("Yes", "This", "Sucks");
@@ -81,9 +86,17 @@ public class Mediator {
     }
 
     public void outputData(String rawPackage) {
+
         String unparsedPackage = PackageManager.unparsePackage(rawPackage);
+        if (PackageManager.mismatchedSource) {
+            return;
+        }
+        if (PackageManager.packageHadErrors){
+            sendInfoMessage("Package arrived with errors");
+            return;
+        }
         outputBlock.getTextField().append(unparsedPackage);
-        sendInfoMessage(PackageManager.getInfoMessage());
+        sendInfoMessage("Package arrived");
     }
 
     public void transferData(char data) {
@@ -93,7 +106,7 @@ public class Mediator {
         //String string = "" + data;
         comPort.sendMessage(PackageManager.parseMessage(destinationCode,
                 sourceCode, errorEmul, dataload));
-        sendInfoMessage("Package has been sent");
+        sendInfoMessage(PackageManager.getInfoMessage());
         clearDataload();
     }
     private boolean dataloadIsFull(){

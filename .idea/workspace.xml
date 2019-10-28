@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="TOKS_laba1:jar" />
+      <artifact name="TOKS_laba1:jar2" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/InputBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/InputBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
@@ -113,7 +115,9 @@
       <workItem from="1571139706677" duration="2155000" />
       <workItem from="1571747224166" duration="7163000" />
       <workItem from="1571864727034" duration="4119000" />
-      <workItem from="1571915865770" duration="2069000" />
+      <workItem from="1571915865770" duration="5857000" />
+      <workItem from="1571994397173" duration="17216000" />
+      <workItem from="1572266134910" duration="4349000" />
     </task>
     <task id="LOCAL-00001" summary="upd">
       <created>1571782604544</created>
@@ -122,7 +126,14 @@
       <option name="project" value="LOCAL" />
       <updated>1571782604544</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Package communication done (except for source code check)">
+      <created>1571918159026</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1571918159026</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TodoView">
@@ -166,6 +177,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="upd" />
-    <option name="LAST_COMMIT_MESSAGE" value="upd" />
+    <MESSAGE value="Package communication done (except for source code check)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Package communication done (except for source code check)" />
   </component>
 </project>

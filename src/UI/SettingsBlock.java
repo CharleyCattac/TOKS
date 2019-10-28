@@ -17,10 +17,10 @@ public class SettingsBlock extends JPanel {
             new JComboBox<>(BaudRate.values());
     private JComboBox<DataBits> dataBitsBox =
             new JComboBox<>(DataBits.values());
-    private JComboBox<Parity> parityBox =
-            new JComboBox<>(Parity.values());
     private JComboBox<StopBits> stopBitsBox =
             new JComboBox<>(StopBits.values());
+    private JComboBox<Parity> parityBox =
+            new JComboBox<>(Parity.values());
 
     private JTextField sourceField = new JTextField();
     private JTextField destinationField = new JTextField();

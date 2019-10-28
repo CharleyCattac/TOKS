@@ -65,8 +65,13 @@ public class InputBlock extends OutputBlock {
                             lastPositionInFile--;
                         }
                     } else {
-                        mediator.transferData(e.getKeyChar());
-                        lastPositionInFile++;
+                        if (e.getKeyChar() >= 'А' && e.getKeyChar() <= 'я' ||
+                               e.getKeyCode() == 27) {
+                            e.consume();
+                        } else {
+                            mediator.transferData(e.getKeyChar());
+                            lastPositionInFile++;
+                        }
                     }
                 }
             }

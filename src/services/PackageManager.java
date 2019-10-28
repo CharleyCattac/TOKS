@@ -4,13 +4,21 @@ class PackageManager {
     static final int DATALOAD_SIZE = 7;
     static private final int PACKAGE_SIZE = DATALOAD_SIZE + 4;
 
-    static private final String START_BYTE = "11111110";
-    static private final byte START_BYTE_INT = 0b1111110;
-    static private final byte LAST_BYTE = 0;
-    static private final byte ERROR_LAST_BYTE = 1;
+    static private final String START_BYTE_STRING = "00001110";
+    static private final byte START_BYTE_VALUE = 0b00001110;
+    static private final byte ESC_BYTE_VALUE = 0b00011011;
+    static private final byte LAST_BYTE_OK = 0;
+    static private final byte LAST_BYTE_ERROR = 1;
 
-    static private String infoMessage = new String("");
+    static private String infoMessage = "";
     static private int initSource = 1;
+
+    static public boolean packageHadErrors = false;
+    static public boolean mismatchedSource = false;
+
+    static void setInitialSource(int source){
+        initSource = source;
+    }
 
     static String parseMessage(int destination,
                                int source,
@@ -27,56 +35,68 @@ class PackageManager {
         }
 
         if (errorEmulationEnabled) {
-            packageData[counter] = ERROR_LAST_BYTE;
+            packageData[counter] = LAST_BYTE_ERROR;
         } else {
-            packageData[counter] = LAST_BYTE;
+            packageData[counter] = LAST_BYTE_OK;
         }
 
-        StringBuilder bitStuffedString = new StringBuilder();
+        StringBuilder bitStuffingBuilder = new StringBuilder();
+
         for (int i = 0; i < PACKAGE_SIZE - 1; i++) {
-            bitStuffedString.append(fromByteToBinaryString(packageData[i]));
+            if (packageData[i] == START_BYTE_VALUE) {
+                bitStuffingBuilder.append(fromByteToBinaryString((byte) (packageData[i] - 1)));
+                bitStuffingBuilder.append(fromByteToBinaryString(ESC_BYTE_VALUE));
+            } else {
+                bitStuffingBuilder.append(fromByteToBinaryString(packageData[i] ));
+            }
         }
 
-        return START_BYTE + bitStuffedString.toString();
+        String bitStuffedString = bitStuffingBuilder.toString();
+        setInfoMessage(START_BYTE_STRING + bitStuffedString);
+        return START_BYTE_STRING + bitStuffedString;
     }
 
     static String unparsePackage(String packageData) {
-        boolean packageHasErrors = false;
+        packageHadErrors = false;
+        mismatchedSource = false;
 
-        if (!packageData.startsWith(START_BYTE)) {
-            packageHasErrors = true;
-        }
-
-        int counter = 0;
-        byte[] rawPackageData = new byte[PACKAGE_SIZE - 1];
-        for (int i = 8; i < packageData.length(); i += 8) {
-            rawPackageData[counter++] = fromBinaryStringToByte(packageData.substring(i, i + Byte.SIZE));
-        }
-
-        counter = 0;
-        if (rawPackageData[counter++] != ((Integer)initSource).byteValue()) {
-            setInfoMessage("".getBytes());
+        if (!packageData.startsWith(START_BYTE_STRING)) {
+            packageHadErrors = true;
             return null;
         }
 
-        counter++;
+        int counter = -1;
+        byte[] rawPackageData = new byte[PACKAGE_SIZE];
+        for (int i = 0; i < packageData.length(); i += Byte.SIZE) {
+            counter++;
+            rawPackageData[counter] = fromBinaryStringToByte(packageData.substring(i, i + Byte.SIZE));
+            if (counter != 0)
+                if (rawPackageData[counter - 1] == (START_BYTE_VALUE - 1) &&
+                    rawPackageData[counter] == ESC_BYTE_VALUE &&
+                    packageData.length() / Byte.SIZE > PACKAGE_SIZE){
+                rawPackageData[counter - 1] += 1;
+                counter--;
+            }
+        }
+
+        counter = 1;
+        if (rawPackageData[counter] != ((Integer)initSource).byteValue()) {
+            mismatchedSource = true;
+            return null;
+        }
+
+        counter += 2;
         StringBuilder message = new StringBuilder();
         for (int i = 0; i < DATALOAD_SIZE; i++) {
             message.append((char)rawPackageData[counter++]);
         }
 
-        if (rawPackageData[counter] != LAST_BYTE) {
-            packageHasErrors = true;
-        }
-
-        if (packageHasErrors){
-            setInfoMessage("Package has errors!".getBytes());
+        if (rawPackageData[counter] != LAST_BYTE_OK) {
+            packageHadErrors = true;
             return null;
         }
-        else {
-            setInfoMessage(rawPackageData);
-            return message.toString();
-        }
+
+        return message.toString();
     }
 
     private static String fromByteToBinaryString(byte aByte) {
@@ -107,10 +127,12 @@ class PackageManager {
 
     private static void setInfoMessage(byte[] packageData){
         StringBuilder rawData = new StringBuilder();
-        if (Integer.toHexString(Byte.toUnsignedInt(START_BYTE_INT)).length() == 1) {
+
+        if (Integer.toHexString(Byte.toUnsignedInt(START_BYTE_VALUE)).length() == 1) {
             rawData.append("0");
         }
-        rawData.append(Integer.toHexString(Byte.toUnsignedInt(START_BYTE_INT)));
+
+        rawData.append(Integer.toHexString(Byte.toUnsignedInt(START_BYTE_VALUE)));
         rawData.append("_");
         for (byte element : packageData) {
             if (Integer.toHexString(Byte.toUnsignedInt(element)).length() == 1) {
@@ -120,7 +142,17 @@ class PackageManager {
             rawData.append("_");
         }
 
+        rawData.deleteCharAt(rawData.length() - 1);
         infoMessage = rawData.toString();
+    }
+
+    private static void setInfoMessage(String packageData){
+        byte[] rawPackageData = new byte[packageData.length() / Byte.SIZE - 1];
+        int counter = 0;
+        for (int i = 8; i < packageData.length(); i += 8) {
+            rawPackageData[counter++] = fromBinaryStringToByte(packageData.substring(i, i + Byte.SIZE));
+        }
+        setInfoMessage(rawPackageData);
     }
 
     static String getInfoMessage(){
