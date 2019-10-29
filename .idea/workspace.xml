@@ -6,12 +6,16 @@
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
+    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="Slight cleaning">
+      <change afterPath="$PROJECT_DIR$/src/coding/CRCMaster.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/ComPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/entities/ComPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/entities/ComPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/COMPortWrap/ComPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Params.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -115,7 +119,8 @@
       <workItem from="1571864727034" duration="4119000" />
       <workItem from="1571915865770" duration="5857000" />
       <workItem from="1571994397173" duration="17216000" />
-      <workItem from="1572266134910" duration="5673000" />
+      <workItem from="1572266134910" duration="14416000" />
+      <workItem from="1572339213022" duration="12260000" />
     </task>
     <task id="LOCAL-00001" summary="upd">
       <created>1571782604544</created>
@@ -138,7 +143,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572284480027</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Slight cleaning">
+      <created>1572286027789</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1572286027789</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView">
@@ -184,6 +196,7 @@
     <MESSAGE value="upd" />
     <MESSAGE value="Package communication done (except for source code check)" />
     <MESSAGE value="Lab2: package transfer, byte stuffing etc - done" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab2: package transfer, byte stuffing etc - done" />
+    <MESSAGE value="Slight cleaning" />
+    <option name="LAST_COMMIT_MESSAGE" value="Slight cleaning" />
   </component>
 </project>

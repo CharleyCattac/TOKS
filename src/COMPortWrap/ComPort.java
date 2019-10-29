@@ -1,4 +1,4 @@
-package entities;
+package COMPortWrap;
 
 import jssc.*;
 import services.Mediator;

@@ -1,9 +1,10 @@
 package services;
 
-import entities.ComPort;
+import COMPortWrap.ComPort;
 import UI.SettingsBlock;
 import UI.OutputBlock;
 import UI.InputBlock;
+import coding.CRCMaster;
 import enums.BaudRate;
 import enums.DataBits;
 import enums.Parity;
@@ -76,12 +77,12 @@ public class Mediator {
     }
 
     public void outputData(String rawPackage) {
-
-        String unparsedPackage = PackageManager.unparsePackage(rawPackage);
-        if (PackageManager.mismatchedSource) {
+        String unparsedPackage = PackageManager.unpackMessage(rawPackage);
+        //String unparsedPackage = PackageManager.unpackMessage(CRCMaster.decode(rawPackage));
+        if (PackageManager.isSourceMismatched()) {
             return;
         }
-        if (PackageManager.packageHadErrors){
+        if (PackageManager.doesPackageHaveErrors()){
             sendInfoMessage("Package arrived with errors");
             return;
         }
@@ -93,9 +94,10 @@ public class Mediator {
         putCharIntoDataload(data);
         if (!dataloadIsFull())
             return;
-        comPort.sendMessage(PackageManager.parseMessage(destinationCode,
+        //comPort.sendMessage(CRCMaster.encode(PackageManager.packMessage(destinationCode,
+        comPort.sendMessage(PackageManager.packMessage(destinationCode,
                 sourceCode, errorEmulation, dataLoad));
-        sendInfoMessage(PackageManager.getInfoMessage());
+        sendInfoMessage(PackageManager.getHexMessage());
         clearDataload();
     }
     private boolean dataloadIsFull(){

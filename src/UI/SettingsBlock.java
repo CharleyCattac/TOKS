@@ -24,7 +24,9 @@ public class SettingsBlock extends JPanel {
 
     private JTextField sourceField = new JTextField();
     private JTextField destinationField = new JTextField();
-    private JCheckBox errorBox = new JCheckBox();
+    private JCheckBox packageErrorBox = new JCheckBox();
+
+    private JCheckBox codingErrorBox = new JCheckBox();
 
     private JButton refreshButton;
     private JButton connectButton;
@@ -82,8 +84,10 @@ public class SettingsBlock extends JPanel {
                 paramsPanel.add(sourceField);
             } else if (i == Params.DESTINATION.getValue()) {
                 paramsPanel.add(destinationField);
-            } else if (i == Params.ERROR.getValue()) {
-                paramsPanel.add(errorBox);
+            } else if (i == Params.PACKAGE_ERROR.getValue()) {
+                paramsPanel.add(packageErrorBox);
+            } else if (i == Params.CODING_ERROR.getValue()) {
+                paramsPanel.add(codingErrorBox);
             }
         }
 
@@ -124,7 +128,7 @@ public class SettingsBlock extends JPanel {
                             (Parity) parityBox.getSelectedItem(),
                             sourceField.getText(),
                             destinationField.getText(),
-                            errorBox.isSelected());
+                            packageErrorBox.isSelected());
                     mediator.enableFormatting();
                     setParamsEnabled(false);
                     connectButton.setText("Disconnect");
@@ -155,7 +159,7 @@ public class SettingsBlock extends JPanel {
         stopBitsBox.setEnabled(status);
         sourceField.setEnabled(status);
         destinationField.setEnabled(status);
-        errorBox.setEnabled(status);
+        packageErrorBox.setEnabled(status);
     }
 
     private void setButtonEnabled(JButton button, boolean status){
