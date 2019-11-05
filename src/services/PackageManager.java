@@ -1,7 +1,7 @@
 package services;
 
-import static services.BinaryStringAssistant.fromBinaryStringToByte;
-import static services.BinaryStringAssistant.fromByteToBinaryString;
+import static services.StringTranslator.fromBinaryStringToByte;
+import static services.StringTranslator.fromByteToBinaryString;
 
 class PackageManager {
     static final int DATALOAD_SIZE = 7;
@@ -10,8 +10,6 @@ class PackageManager {
     static private final String START_BYTE_STRING = "00001111";
     //static private final byte START_BYTE_VALUE = 0b00001111;
     //static private final byte ESC_BYTE_VALUE = 0b00011011;
-    static private final byte LAST_BYTE_OK = 0;
-    static private final byte LAST_BYTE_ERROR = 1;
 
     static private String hexMessage = "";
     static private int initSource = 1;
@@ -25,7 +23,6 @@ class PackageManager {
 
     static String packMessage(int destination,
                               int source,
-                              boolean errorEmulationEnabled,
                               char[] dataload) {
         initSource = source;
         byte[] packageData = new byte[PACKAGE_SIZE - 1];
@@ -36,14 +33,6 @@ class PackageManager {
         for (int i = 0; i < DATALOAD_SIZE; i++) {
             packageData[index++] = (byte)dataload[i];
         }
-
-        /*
-        if (errorEmulationEnabled) {
-            packageData[index] = LAST_BYTE_ERROR;
-        } else {
-            packageData[index] = LAST_BYTE_OK;
-        }
-         */
 
         StringBuilder binaryBuilder = new StringBuilder();
 
@@ -62,7 +51,6 @@ class PackageManager {
         String bitStuffedString = binaryBuilder.toString()
                 .replace("0000111", "00001110");
 
-        setHexMessage(START_BYTE_STRING + bitStuffedString);
         return START_BYTE_STRING + bitStuffedString;
     }
 
@@ -106,52 +94,7 @@ class PackageManager {
             message.append((char)rawPackageData[index++]);
         }
 
-        /*
-        if (rawPackageData[index] != LAST_BYTE_OK) {
-            packageHasErrors = true;
-            return null;
-        }
-         */
-
         return message.toString();
-    }
-
-    private static void setHexMessage(byte[] packageData){
-        StringBuilder hexString = new StringBuilder();
-
-        for (byte element : packageData) {
-            if (Integer.toHexString(Byte.toUnsignedInt(element)).length() == 1) {
-                hexString.append("0");
-            }
-            hexString.append(Integer.toHexString(Byte.toUnsignedInt(element)));
-            hexString.append("_");
-        }
-
-        hexString.deleteCharAt(hexString.length() - 1);
-        hexMessage = hexString.toString();
-    }
-
-    private static void setHexMessage(String packageData){
-        StringBuilder hexSuitable = new StringBuilder(packageData);
-        int extraZeros = hexSuitable.length() % 8;
-
-        if (extraZeros != 0) {
-            extraZeros = Byte.SIZE - extraZeros;
-        }
-        for (int i = 0; i < extraZeros; i++) {
-            hexSuitable.append('0');
-        }
-
-        byte[] bytePackageData = new byte[hexSuitable.length() / Byte.SIZE];
-        int counter = 0;
-        for (int i = 0; i < hexSuitable.length(); i += Byte.SIZE) {
-            bytePackageData[counter++] = fromBinaryStringToByte(hexSuitable.substring(i, i + Byte.SIZE));
-        }
-        setHexMessage(bytePackageData);
-    }
-
-    static String getHexMessage(){
-        return hexMessage;
     }
 
     static boolean doesPackageHaveErrors(){

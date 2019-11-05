@@ -8,12 +8,8 @@
   <component name="ChangeListManager">
     <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/META-INF/TOKS_laba1.kotlin_module" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/coding/CRCMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coding/CRCMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/enums/Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Params.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/StringTranslator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
     </list>
@@ -129,7 +125,7 @@
       <workItem from="1572776520093" duration="4434000" />
       <workItem from="1572783502811" duration="30000" />
       <workItem from="1572858252056" duration="3012000" />
-      <workItem from="1572963239712" duration="3709000" />
+      <workItem from="1572963239712" duration="6281000" />
     </task>
     <task id="LOCAL-00001" summary="upd">
       <created>1571782604544</created>
@@ -166,7 +162,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572353508833</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Lab3: CRC">
+      <created>1572967009211</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1572967009211</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView">
@@ -214,6 +217,7 @@
     <MESSAGE value="Lab2: package transfer, byte stuffing etc - done" />
     <MESSAGE value="Slight cleaning" />
     <MESSAGE value="Lab2: byte stuffing -&gt; bit stuffing" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab2: byte stuffing -&gt; bit stuffing" />
+    <MESSAGE value="Lab3: CRC" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab3: CRC" />
   </component>
 </project>

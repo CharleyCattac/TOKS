@@ -99,11 +99,9 @@ public class Mediator {
         if (!dataloadIsFull())
             return;
         String binaryMessage = CRCMaster.encode(PackageManager.packMessage(destinationCode,
-                sourceCode, false, dataLoad), packageErrorEmulation);
+                sourceCode, dataLoad), packageErrorEmulation);
         comPort.sendMessage(binaryMessage);
-        //comPort.sendMessage(PackageManager.packMessage(destinationCode,
-        //        sourceCode, packageErrorEmulation, dataLoad)));
-        sendInfoMessage(BinaryStringAssistant.stringToHex(binaryMessage));
+        sendInfoMessage(StringTranslator.stringToHex(binaryMessage));
         clearDataload();
     }
     private boolean dataloadIsFull(){

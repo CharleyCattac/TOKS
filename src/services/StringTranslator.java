@@ -1,7 +1,7 @@
 package services;
 
-public class BinaryStringAssistant {
-    public static String fromByteToBinaryString(byte byteValue) {
+class StringTranslator {
+    static String fromByteToBinaryString(byte byteValue) {
         int divider = (int)Math.pow(2, 7);
         StringBuilder binaryString = new StringBuilder();
         int andResult;
@@ -17,7 +17,7 @@ public class BinaryStringAssistant {
         return binaryString.toString();
     }
 
-    public static byte fromBinaryStringToByte(String string) {
+    static byte fromBinaryStringToByte(String string) {
         int result = 0;
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == '1') {
@@ -42,8 +42,9 @@ public class BinaryStringAssistant {
         return hexString.toString();
     }
 
-    public static String stringToHex(String packageData){
+    static String stringToHex(String packageData){
         StringBuilder hexSuitable = new StringBuilder(packageData);
+
         int extraZeros = hexSuitable.length() % 8;
 
         if (extraZeros != 0) {

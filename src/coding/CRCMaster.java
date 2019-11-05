@@ -1,9 +1,5 @@
 package coding;
 
-import services.BinaryStringAssistant;
-
-import java.awt.*;
-import static services.BinaryStringAssistant.fromBinaryStringToByte;
 import java.util.Random;
 
 public class CRCMaster {
@@ -12,7 +8,6 @@ public class CRCMaster {
     private static final String POLYNOMIAL = "10000011"; //131
 
     private static boolean errorDiscovered = false;
-    private static String CRCstr;
 
     public static String encode(String message, boolean enableErrorEmulation) {
         String CRC = divideOnPolynomial(message + extraNullBytes);
@@ -23,7 +18,6 @@ public class CRCMaster {
             int index = Byte.SIZE * 3 + random.nextInt(Byte.SIZE * POLYNOMIAL_POWER - 2);
             message = makeSingleError(message, index);
         }
-        CRCstr = CRC;
         return message + CRC;
     }
 
@@ -49,18 +43,6 @@ public class CRCMaster {
         char a = binary.charAt(index);
         binary = binary.substring(index + 1);
         return a == '0' ? (buf + "1" + binary) : (buf + "0" + binary);
-    }
-
-    public static String getHexCRC(){
-        StringBuilder hexCRC = new StringBuilder();
-        hexCRC.append("_");
-        byte CRC = BinaryStringAssistant.fromBinaryStringToByte(CRCstr.length() == Byte.SIZE ? CRCstr : "0" + CRCstr);
-        if (Integer.toHexString(Byte.toUnsignedInt(CRC)).length() == 1) {
-            hexCRC.append("0");
-        }
-        hexCRC.append(Integer.toHexString(Byte.toUnsignedInt(CRC)));
-        return hexCRC.toString();
-
     }
 
     private static String XORWithPolynomial(String a) {
