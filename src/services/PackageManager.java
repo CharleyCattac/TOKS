@@ -5,7 +5,7 @@ import static services.BinaryStringAssistant.fromByteToBinaryString;
 
 class PackageManager {
     static final int DATALOAD_SIZE = 7;
-    static private final int PACKAGE_SIZE = DATALOAD_SIZE + 4;
+    static private final int PACKAGE_SIZE = DATALOAD_SIZE + 3;
 
     static private final String START_BYTE_STRING = "00001111";
     //static private final byte START_BYTE_VALUE = 0b00001111;
@@ -37,11 +37,13 @@ class PackageManager {
             packageData[index++] = (byte)dataload[i];
         }
 
+        /*
         if (errorEmulationEnabled) {
             packageData[index] = LAST_BYTE_ERROR;
         } else {
             packageData[index] = LAST_BYTE_OK;
         }
+         */
 
         StringBuilder binaryBuilder = new StringBuilder();
 
@@ -56,11 +58,10 @@ class PackageManager {
             }
              */
         }
-        System.out.println(binaryBuilder.toString());
+
         String bitStuffedString = binaryBuilder.toString()
-                .replace(START_BYTE_STRING.substring(0, START_BYTE_STRING.length() - 1),
-                        START_BYTE_STRING.substring(0, START_BYTE_STRING.length() - 1) + "1");
-        System.out.println(binaryBuilder.toString());
+                .replace("0000111", "00001110");
+
         setHexMessage(START_BYTE_STRING + bitStuffedString);
         return START_BYTE_STRING + bitStuffedString;
     }
@@ -75,10 +76,7 @@ class PackageManager {
         }
         packageData = packageData.substring(Byte.SIZE);
 
-        System.out.println(packageData);
-        packageData = packageData.replace(START_BYTE_STRING.substring(0, START_BYTE_STRING.length() - 1) + "1",
-                                                START_BYTE_STRING.substring(0, START_BYTE_STRING.length() - 1));
-        System.out.println(packageData);
+        packageData = packageData.replace("00001110","0000111");
 
         int index = -1;
         byte[] rawPackageData = new byte[PACKAGE_SIZE - 1];
@@ -108,10 +106,12 @@ class PackageManager {
             message.append((char)rawPackageData[index++]);
         }
 
+        /*
         if (rawPackageData[index] != LAST_BYTE_OK) {
             packageHasErrors = true;
             return null;
         }
+         */
 
         return message.toString();
     }
@@ -134,9 +134,9 @@ class PackageManager {
     private static void setHexMessage(String packageData){
         StringBuilder hexSuitable = new StringBuilder(packageData);
         int extraZeros = hexSuitable.length() % 8;
+
         if (extraZeros != 0) {
             extraZeros = Byte.SIZE - extraZeros;
-            System.out.println(extraZeros);
         }
         for (int i = 0; i < extraZeros; i++) {
             hexSuitable.append('0');

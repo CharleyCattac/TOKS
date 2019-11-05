@@ -1,7 +1,7 @@
 package services;
 
-class BinaryStringAssistant {
-    static String fromByteToBinaryString(byte byteValue) {
+public class BinaryStringAssistant {
+    public static String fromByteToBinaryString(byte byteValue) {
         int divider = (int)Math.pow(2, 7);
         StringBuilder binaryString = new StringBuilder();
         int andResult;
@@ -17,7 +17,7 @@ class BinaryStringAssistant {
         return binaryString.toString();
     }
 
-    static byte fromBinaryStringToByte(String string) {
+    public static byte fromBinaryStringToByte(String string) {
         int result = 0;
         for (int i = 0; i < string.length(); i++) {
             if (string.charAt(i) == '1') {
@@ -25,5 +25,39 @@ class BinaryStringAssistant {
             }
         }
         return ((Integer)result).byteValue();
+    }
+
+    private static String stringToHex(byte[] packageData){
+        StringBuilder hexString = new StringBuilder();
+
+        for (byte element : packageData) {
+            if (Integer.toHexString(Byte.toUnsignedInt(element)).length() == 1) {
+                hexString.append("0");
+            }
+            hexString.append(Integer.toHexString(Byte.toUnsignedInt(element)));
+            hexString.append("_");
+        }
+
+        hexString.deleteCharAt(hexString.length() - 1);
+        return hexString.toString();
+    }
+
+    public static String stringToHex(String packageData){
+        StringBuilder hexSuitable = new StringBuilder(packageData);
+        int extraZeros = hexSuitable.length() % 8;
+
+        if (extraZeros != 0) {
+            extraZeros = Byte.SIZE - extraZeros;
+        }
+        for (int i = 0; i < extraZeros; i++) {
+            hexSuitable.append('0');
+        }
+
+        byte[] bytePackageData = new byte[hexSuitable.length() / Byte.SIZE];
+        int counter = 0;
+        for (int i = 0; i < hexSuitable.length(); i += Byte.SIZE) {
+            bytePackageData[counter++] = fromBinaryStringToByte(hexSuitable.substring(i, i + Byte.SIZE));
+        }
+        return stringToHex(bytePackageData);
     }
 }

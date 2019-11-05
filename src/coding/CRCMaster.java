@@ -1,101 +1,151 @@
 package coding;
 
-public class CRCMaster {
-    public static final int polynomialPower = 3;
-    private static final String extraNullBytes = "000";
-    private static final String polynomial = "1011";
+import services.BinaryStringAssistant;
 
-    public static String encode(String message) {
-        return message + getMod(message + extraNullBytes, polynomial);
+import java.awt.*;
+import static services.BinaryStringAssistant.fromBinaryStringToByte;
+import java.util.Random;
+
+public class CRCMaster {
+    private static final int POLYNOMIAL_POWER = 7;
+    private static final String extraNullBytes = "0000000";
+    private static final String POLYNOMIAL = "10000011"; //131
+
+    private static boolean errorDiscovered = false;
+    private static String CRCstr;
+
+    public static String encode(String message, boolean enableErrorEmulation) {
+        String CRC = divideOnPolynomial(message + extraNullBytes);
+        System.out.println("Message + extraNullBytes = " + message + " " + extraNullBytes);
+        System.out.println("CRC = 0" + CRC);
+        if (enableErrorEmulation) {
+            Random random = new Random();
+            int index = Byte.SIZE * 3 + random.nextInt(Byte.SIZE * POLYNOMIAL_POWER - 2);
+            message = makeSingleError(message, index);
+        }
+        CRCstr = CRC;
+        return message + CRC;
     }
 
     public static String decode(String encodedMessage) {
-        String messageWithoutCRCField = encodedMessage.substring(0, encodedMessage.length() - polynomialPower);
-        return amountOfSingles(getMod(encodedMessage, polynomial)) == 0 ?
-                messageWithoutCRCField : recoverMessage(messageWithoutCRCField);
-    }
-
-    private static String recoverMessage(String message) {
-        String mod = getMod(message, polynomial);
-        if (amountOfSingles(mod) > 1) {
-            return shiftRight(recoverMessage(shiftLeft(message)));
-        }
-        else {
-            return extendedXOR(mod, message);
+        if (calculateWeight(divideOnPolynomial(encodedMessage)) > 0) {
+            System.out.println("Weight " + calculateWeight(divideOnPolynomial(encodedMessage)));
+            errorDiscovered = true;
+            encodedMessage = fixSingleError(encodedMessage);
+            assert encodedMessage != null;
+            return encodedMessage.substring(0, encodedMessage.length() - POLYNOMIAL_POWER);
+        } else {
+            errorDiscovered = false;
+            return encodedMessage.substring(0, encodedMessage.length() - POLYNOMIAL_POWER);
         }
     }
 
-    private static int amountOfSingles(String raw) {
-        int count = 0;
-        for (int i = 0; i < raw.length(); i++) {
-            if (raw.charAt(i) == '1') {
-                count++;
+    public static boolean errorWasDiscovered(){
+        return errorDiscovered;
+    }
+
+    private static String makeSingleError(String binary, int index) {
+        String buf = binary.substring(0, index);
+        char a = binary.charAt(index);
+        binary = binary.substring(index + 1);
+        return a == '0' ? (buf + "1" + binary) : (buf + "0" + binary);
+    }
+
+    public static String getHexCRC(){
+        StringBuilder hexCRC = new StringBuilder();
+        hexCRC.append("_");
+        byte CRC = BinaryStringAssistant.fromBinaryStringToByte(CRCstr.length() == Byte.SIZE ? CRCstr : "0" + CRCstr);
+        if (Integer.toHexString(Byte.toUnsignedInt(CRC)).length() == 1) {
+            hexCRC.append("0");
+        }
+        hexCRC.append(Integer.toHexString(Byte.toUnsignedInt(CRC)));
+        return hexCRC.toString();
+
+    }
+
+    private static String XORWithPolynomial(String a) {
+        if (a.length() != Byte.SIZE)
+            throw new IllegalArgumentException("String's length must be equal to byte size");
+        StringBuilder result = new StringBuilder("");
+        for (int i = 0; i < 8; i++) {
+            if (a.charAt(i) == POLYNOMIAL.charAt(i)) {
+                result.append("0");
+            } else {
+                result.append("1");
             }
         }
-        return count;
+        return result.toString();
     }
 
-    private static String getMod(String dividend, String divider) {
-        StringBuilder sb = new StringBuilder(dividend);
-        for (int i = 0; i <= dividend.length() - divider.length(); i++) {
-            String s = divide(sb.substring(i, i + divider.length()), divider);
-            if (s != null) {
-                sb.delete(i, i + divider.length());
-                sb.insert(i, s);
+    private static String divideOnPolynomial(String binaryString) {
+        binaryString = removeNullBytes(binaryString);
+        if (binaryString.length() == POLYNOMIAL_POWER) {
+            return binaryString;
+        }
+
+        String result;
+        while (true) {
+            String buf = binaryString.substring(0, Byte.SIZE);
+            binaryString = binaryString.substring(Byte.SIZE);
+            binaryString = XORWithPolynomial(buf) + binaryString;
+            binaryString = removeNullBytes(binaryString);
+            if (binaryString.length() == POLYNOMIAL_POWER) {
+                result = binaryString;
+                break;
+            } else if (binaryString.length() == Byte.SIZE) {
+                result = XORWithPolynomial(binaryString).substring(1);
+                break;
             }
         }
-        return sb.substring(sb.length() - polynomialPower);
+        return result;
     }
 
-    private static String divide(String s1, String s2) {
-        if (s1.length() == s2.length()) {
-            if (s1.charAt(0) == '1') {
-                return XOR(s1, s2);
+    private static String removeNullBytes(String binary) {
+        if (binary.length() < Byte.SIZE)
+            throw new IllegalArgumentException("String must contain at least 7 chars");
+        char a = binary.charAt(0);
+        while (a == '0') {
+            binary = binary.substring(1);
+            if (binary.length() == 7) {
+                break;
+            }
+            a = binary.charAt(0);
+        }
+        return binary;
+    }
+
+    private static String fixSingleError(String binary) {
+        for (int i = 0; i < binary.length(); i++) {
+            binary = invertChar(binary, i);
+            if(divideOnPolynomial(binary).equals(extraNullBytes)) {
+                return binary;
+            }
+            else {
+                binary = invertChar(binary, i);
             }
         }
         return null;
     }
 
-    private static String XOR(String s1, String s2) {
-        StringBuilder xorString = new StringBuilder();
-        for (int i = 0; i < s1.length(); i++)
-            xorString.append(s1.charAt(i) ^ s2.charAt(i));
-        return xorString.toString();
+    private static String invertChar(String binaryString, int index) {
+        String buf = binaryString.substring(0, index);
+        if (binaryString.charAt(index) == '0') {
+            binaryString = binaryString.substring(index + 1);
+            binaryString = buf + "1" + binaryString;
+        } else {
+            binaryString = binaryString.substring(index + 1);
+            binaryString = buf + "0" + binaryString;
+        }
+        return binaryString;
     }
 
-    private static String extendedXOR(String s1, String s2) {
-        StringBuilder sb1 = new StringBuilder(s1);
-        StringBuilder sb2 = new StringBuilder(s2);
-        int lengthDifference;
-        if (sb1.length() > sb2.length()) {
-            lengthDifference = sb1.length() - sb2.length();
-            for (int i = 0; i < lengthDifference; i++) {
-                sb2.insert(0,'0');
+    private static int calculateWeight(String bin) {
+        int res = 0;
+        for (int i = 0; i < bin.length(); i++) {
+            if (bin.charAt(i) == '1') {
+                res++;
             }
         }
-        else {
-            lengthDifference = sb2.length() - sb1.length();
-            for (int i = 0; i < lengthDifference; i++) {
-                sb1.insert(0,'0');
-            }
-        }
-        return XOR(sb1.toString(), sb2.toString());
+        return res;
     }
-
-    private static String shiftLeft(String raw) {
-        StringBuilder res = new StringBuilder(raw);
-        char temp = res.charAt(0);
-        res.deleteCharAt(0);
-        res.append(temp);
-        return res.toString();
-    }
-
-    private static String shiftRight(String raw) {
-        StringBuilder res = new StringBuilder(raw);
-        char temp = res.charAt(res.length() - 1);
-        res.deleteCharAt(res.length() - 1);
-        res.insert(0,temp);
-        return res.toString();
-    }
-
 }

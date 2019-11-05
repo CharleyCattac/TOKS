@@ -22,7 +22,7 @@ public class Mediator {
     private char[] dataLoad = new char[dataLoadSize];
     private int sourceCode = 1;
     private int destinationCode = 1;
-    private boolean errorEmulation = false;
+    private boolean packageErrorEmulation = false;
 
     public Mediator() {
          String[] fields = {
@@ -33,7 +33,7 @@ public class Mediator {
                  "Parity",
                  "Source address",
                  "Destination address",
-                 "Error"
+                 "Package error"
         };
         int textFieldHeight = 6;
         int textFieldWidth = 38;
@@ -46,7 +46,8 @@ public class Mediator {
 
     public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
                          StopBits stopBits, Parity parityMode,
-                         String source, String destination, boolean error) throws SerialPortException{
+                         String source, String destination, boolean packageError)
+                         throws SerialPortException{
         try{
             sourceCode = Integer.parseInt(source);
             destinationCode = Integer.parseInt(destination);
@@ -55,7 +56,7 @@ public class Mediator {
                 sourceCode == destinationCode)
                 throw new SerialPortException("Oops", "I", "Did it again");
             PackageManager.setInitialSource(sourceCode);
-            errorEmulation = error;
+            packageErrorEmulation = packageError;
         } catch (Exception ex){
             throw new SerialPortException("Yes", "This", "Sucks");
             //sorry not sorry
@@ -77,27 +78,32 @@ public class Mediator {
     }
 
     public void outputData(String rawPackage) {
-        String unparsedPackage = PackageManager.unpackMessage(rawPackage);
-        //String unparsedPackage = PackageManager.unpackMessage(CRCMaster.decode(rawPackage));
+        //String unparsedPackage = PackageManager.unpackMessage(rawPackage);
+        String unparsedPackage = PackageManager.unpackMessage(CRCMaster.decode(rawPackage));
         if (PackageManager.isSourceMismatched()) {
             return;
         }
         if (PackageManager.doesPackageHaveErrors()){
-            sendInfoMessage("Package arrived with errors");
+            sendInfoMessage("Package arrived with errors; unable to fix");
             return;
         }
         outputBlock.getTextField().append(unparsedPackage);
-        sendInfoMessage("Package arrived");
+        if (CRCMaster.errorWasDiscovered())
+            sendInfoMessage("Package arrived with an error; error fixed");
+        else
+            sendInfoMessage("Package arrived");
     }
 
     public void transferData(char data) {
         putCharIntoDataload(data);
         if (!dataloadIsFull())
             return;
-        //comPort.sendMessage(CRCMaster.encode(PackageManager.packMessage(destinationCode,
-        comPort.sendMessage(PackageManager.packMessage(destinationCode,
-                sourceCode, errorEmulation, dataLoad));
-        sendInfoMessage(PackageManager.getHexMessage());
+        String binaryMessage = CRCMaster.encode(PackageManager.packMessage(destinationCode,
+                sourceCode, false, dataLoad), packageErrorEmulation);
+        comPort.sendMessage(binaryMessage);
+        //comPort.sendMessage(PackageManager.packMessage(destinationCode,
+        //        sourceCode, packageErrorEmulation, dataLoad)));
+        sendInfoMessage(BinaryStringAssistant.stringToHex(binaryMessage));
         clearDataload();
     }
     private boolean dataloadIsFull(){

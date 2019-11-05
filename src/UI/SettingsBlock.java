@@ -26,7 +26,7 @@ public class SettingsBlock extends JPanel {
     private JTextField destinationField = new JTextField();
     private JCheckBox packageErrorBox = new JCheckBox();
 
-    private JCheckBox codingErrorBox = new JCheckBox();
+    //private JCheckBox codingErrorBox = new JCheckBox();
 
     private JButton refreshButton;
     private JButton connectButton;
@@ -86,8 +86,6 @@ public class SettingsBlock extends JPanel {
                 paramsPanel.add(destinationField);
             } else if (i == Params.PACKAGE_ERROR.getValue()) {
                 paramsPanel.add(packageErrorBox);
-            } else if (i == Params.CODING_ERROR.getValue()) {
-                paramsPanel.add(codingErrorBox);
             }
         }
 
@@ -145,7 +143,7 @@ public class SettingsBlock extends JPanel {
                 }
             } catch (Exception ex){
                 ex.printStackTrace();
-                mediator.sendInfoMessage("Unable to perform requested action");
+                mediator.sendInfoMessage("Invalid parameters!");
             }
         });
         buttonPanel.add(connectButton);

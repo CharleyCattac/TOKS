@@ -5,8 +5,7 @@ public enum Params {
     DATABITS(2), STOPBITS(3),
     PARITY(4),
     SOURCE(5), DESTINATION(6),
-    PACKAGE_ERROR(7),
-    CODING_ERROR(8);
+    PACKAGE_ERROR(7);
 
     private final int value;
 

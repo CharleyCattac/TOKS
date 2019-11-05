@@ -2,18 +2,18 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="TOKS_laba1:jar2" />
+      <artifact name="TOKS_laba1:jar3" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="Slight cleaning">
-      <change afterPath="$PROJECT_DIR$/src/coding/CRCMaster.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" afterDir="false" />
+    <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/META-INF/TOKS_laba1.kotlin_module" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/entities/ComPort.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/COMPortWrap/ComPort.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coding/CRCMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coding/CRCMaster.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/enums/Params.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/enums/Params.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
     </list>
@@ -57,7 +57,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1569922066946" />
-    <property name="last_opened_file_path" value="C:/Program Files/Java/jssc-2.8.0.jar!/libs/windows" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../Software design and dev technologies/RadioNetRE" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -120,7 +120,16 @@
       <workItem from="1571915865770" duration="5857000" />
       <workItem from="1571994397173" duration="17216000" />
       <workItem from="1572266134910" duration="14416000" />
-      <workItem from="1572339213022" duration="12260000" />
+      <workItem from="1572339213022" duration="15413000" />
+      <workItem from="1572512267442" duration="667000" />
+      <workItem from="1572513004653" duration="4000" />
+      <workItem from="1572524997739" duration="4701000" />
+      <workItem from="1572613944176" duration="6321000" />
+      <workItem from="1572697091922" duration="18206000" />
+      <workItem from="1572776520093" duration="4434000" />
+      <workItem from="1572783502811" duration="30000" />
+      <workItem from="1572858252056" duration="3012000" />
+      <workItem from="1572963239712" duration="3709000" />
     </task>
     <task id="LOCAL-00001" summary="upd">
       <created>1571782604544</created>
@@ -150,7 +159,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572286027789</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Lab2: byte stuffing -&gt; bit stuffing">
+      <created>1572353508833</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1572353508833</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TodoView">
@@ -197,6 +213,7 @@
     <MESSAGE value="Package communication done (except for source code check)" />
     <MESSAGE value="Lab2: package transfer, byte stuffing etc - done" />
     <MESSAGE value="Slight cleaning" />
-    <option name="LAST_COMMIT_MESSAGE" value="Slight cleaning" />
+    <MESSAGE value="Lab2: byte stuffing -&gt; bit stuffing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab2: byte stuffing -&gt; bit stuffing" />
   </component>
 </project>
