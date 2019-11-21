@@ -8,6 +8,7 @@ import java.awt.event.*;
 public class InputBlock extends OutputBlock {
 
     private int lastPositionInFile = 1;
+    private boolean inputOk;
 
     public InputBlock(Mediator mediator, String labelName,
                       int textFieldWidth, int textFieldHeight) {
@@ -65,8 +66,9 @@ public class InputBlock extends OutputBlock {
                             lastPositionInFile--;
                         }
                     } else {
-                        if (e.getKeyChar() >= 'А' && e.getKeyChar() <= 'я' ||
-                               e.getKeyCode() == 27) {
+                        if ((e.getKeyChar() >= 'А' && e.getKeyChar() <= 'я') ||
+                               e.getKeyChar() == 'X' ||
+                            !mediator.isTransmissionIsOver()) {
                             e.consume();
                         } else {
                             mediator.transferData(e.getKeyChar());
@@ -83,7 +85,8 @@ public class InputBlock extends OutputBlock {
                     e.getKeyCode() == KeyEvent.VK_UP ||
                     e.getKeyCode() == KeyEvent.VK_DOWN ||
                     e.getKeyCode() == KeyEvent.VK_LEFT ||
-                    e.getKeyCode() == KeyEvent.VK_RIGHT) {
+                    e.getKeyCode() == KeyEvent.VK_RIGHT ||
+                        !mediator.isTransmissionIsOver()) {
                         e.consume();
                 }
             }

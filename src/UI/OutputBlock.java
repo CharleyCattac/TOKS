@@ -5,14 +5,9 @@ import java.awt.*;
 
 public class OutputBlock extends JPanel {
 
-    private JPanel labelPanel;
-    private JPanel textPanel;
     private JTextArea textField;
-    private JLabel label;
-    private JPanel sequencePanel;
 
-    public OutputBlock(String labelName,
-                       int textFieldWidth, int textFieldHeight) {
+    public OutputBlock(String labelName, int textFieldWidth, int textFieldHeight) {
         super(new BorderLayout());
 
         JPanel extraPanel = new JPanel(new BorderLayout());
@@ -20,8 +15,8 @@ public class OutputBlock extends JPanel {
         extraButton.setEnabled(false);
         extraButton.setBorderPainted(false);
 
-        labelPanel = new JPanel(new GridLayout(1, 1));
-        textPanel = new JPanel((new GridLayout(1, 1)));
+        JPanel labelPanel = new JPanel(new GridLayout(1, 1));
+        JPanel textPanel = new JPanel((new GridLayout(1, 1)));
         extraPanel.add(labelPanel, BorderLayout.WEST);
         extraPanel.add(textPanel, BorderLayout.CENTER);
         add(extraButton, BorderLayout.WEST);
@@ -37,17 +32,13 @@ public class OutputBlock extends JPanel {
         JScrollPane sp = new JScrollPane(textField);
         sp.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-        label = new JLabel(labelName, JLabel.RIGHT);
+        JLabel label = new JLabel(labelName, JLabel.RIGHT);
         label.setLabelFor(sp);
 
         labelPanel.add(label);
-        sequencePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
+        JPanel sequencePanel = new JPanel(new FlowLayout(FlowLayout.LEFT));
         sequencePanel.add(sp);
         textPanel.add(sequencePanel);
-
-        extraButton.setBackground(Color.PINK);
-        labelPanel.setBackground(Color.PINK);
-        sequencePanel.setBackground(Color.PINK);
     }
 
     public JTextArea getTextField() {

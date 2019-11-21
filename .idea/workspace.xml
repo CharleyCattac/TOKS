@@ -2,16 +2,37 @@
 <project version="4">
   <component name="ArtifactsWorkspaceSettings">
     <artifacts-to-build>
-      <artifact name="TOKS_laba1:jar3" />
+      <artifact name="TOKS_laba1:jar4" />
     </artifacts-to-build>
   </component>
   <component name="ChangeListManager">
     <list default="true" id="36abedc7-62c0-4eca-a89c-cb23f0c8459c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TOKS_laba1_jar2.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TOKS_laba1_jar3.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/artifacts/TOKS_laba1_jar4.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/values/Constants.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/coding/CRCMaster.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/coding/CRCMaster.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/BinaryStringAssistant.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/StringTranslator.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/InputBlock.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/UI/MainWindow.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/TOKS_laba1/services/Mediator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/COMPortWrap/ComPort.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/InputBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/InputBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/MainWindow.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/OutputBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/OutputBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/UI/SettingsBlock.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/UI/SettingsBlock.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/coding/CRCMaster.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/BaudRate.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/DataBits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/Params.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/Parity.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/enums/StopBits.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/InfoLine.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/src/services/Mediator.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/Mediator.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/PackageManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/services/PackageManager.java" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +78,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="application.passwordSafe" />
@@ -125,7 +146,14 @@
       <workItem from="1572776520093" duration="4434000" />
       <workItem from="1572783502811" duration="30000" />
       <workItem from="1572858252056" duration="3012000" />
-      <workItem from="1572963239712" duration="6281000" />
+      <workItem from="1572963239712" duration="7035000" />
+      <workItem from="1573071661791" duration="5925000" />
+      <workItem from="1573129187829" duration="8847000" />
+      <workItem from="1573216225563" duration="7098000" />
+      <workItem from="1573554628557" duration="7442000" />
+      <workItem from="1573715595565" duration="208000" />
+      <workItem from="1573913725305" duration="256000" />
+      <workItem from="1574367069582" duration="122000" />
     </task>
     <task id="LOCAL-00001" summary="upd">
       <created>1571782604544</created>
@@ -169,7 +197,14 @@
       <option name="project" value="LOCAL" />
       <updated>1572967009211</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Lab3: CRC + hexMessage created after encoding">
+      <created>1572993052241</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1572993052241</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TodoView">
@@ -218,6 +253,7 @@
     <MESSAGE value="Slight cleaning" />
     <MESSAGE value="Lab2: byte stuffing -&gt; bit stuffing" />
     <MESSAGE value="Lab3: CRC" />
-    <option name="LAST_COMMIT_MESSAGE" value="Lab3: CRC" />
+    <MESSAGE value="Lab3: CRC + hexMessage created after encoding" />
+    <option name="LAST_COMMIT_MESSAGE" value="Lab3: CRC + hexMessage created after encoding" />
   </component>
 </project>

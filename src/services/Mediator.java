@@ -1,72 +1,45 @@
 package services;
 
-import COMPortWrap.ComPort;
 import UI.SettingsBlock;
 import UI.OutputBlock;
 import UI.InputBlock;
-import coding.CRCMaster;
-import enums.BaudRate;
-import enums.DataBits;
-import enums.Parity;
-import enums.StopBits;
-import jssc.SerialPortException;
+import values.Constants;
 
 public class Mediator {
 
     private InputBlock inputBlock;
     private OutputBlock outputBlock;
     private SettingsBlock settingsBlock;
-    private ComPort comPort;
 
-    private final int dataLoadSize = PackageManager.DATALOAD_SIZE;
-    private char[] dataLoad = new char[dataLoadSize];
-    private int sourceCode = 1;
-    private int destinationCode = 1;
-    private boolean packageErrorEmulation = false;
+    private char[] burstModeBuffer = new char[Constants.BURST_SIZE];
+    private boolean burstModeEnabled = false;
+    private StringBuilder wholeMessage = new StringBuilder("");
+
+    private boolean transmissionIsOver = true;
+
+    public boolean isTransmissionIsOver() {
+        return transmissionIsOver;
+    }
 
     public Mediator() {
          String[] fields = {
-                "Com ports",
-                "Baud rate",
-                "Data bits",
-                "Stop bits",
-                 "Parity",
-                 "Source address",
-                 "Destination address",
-                 "Package error"
+                "Burst mode"
         };
-        int textFieldHeight = 6;
+        int textFieldHeight = 9;
         int textFieldWidth = 38;
         inputBlock = new InputBlock(this, "Input   ", textFieldWidth, textFieldHeight);
         outputBlock = new OutputBlock("Output", textFieldWidth, textFieldHeight);
-        settingsBlock = new SettingsBlock(this, fields);
-        comPort = new ComPort(this);
-        clearDataload();
+        settingsBlock = new SettingsBlock(this, fields, textFieldWidth - 3, textFieldHeight - 4);
+        clearPackage();
     }
 
-    public void openPort(String portName, BaudRate baudRate, DataBits dataBits,
-                         StopBits stopBits, Parity parityMode,
-                         String source, String destination, boolean packageError)
-                         throws SerialPortException{
-        try{
-            sourceCode = Integer.parseInt(source);
-            destinationCode = Integer.parseInt(destination);
-            if (sourceCode < 0 || sourceCode > 255 ||
-                    destinationCode < 0 || destinationCode > 255 ||
-                sourceCode == destinationCode)
-                throw new SerialPortException("Oops", "I", "Did it again");
-            PackageManager.setInitialSource(sourceCode);
-            packageErrorEmulation = packageError;
-        } catch (Exception ex){
-            throw new SerialPortException("Yes", "This", "Sucks");
-            //sorry not sorry
-        }
-        comPort.initializePort(portName, baudRate.getValue(), dataBits.getValue(),
-                stopBits.getValue(), parityMode.getValue());
+    public void connect(boolean burstMode) {
+        burstModeEnabled = burstMode;
+        clearPackage();
     }
 
-    public void closePort()throws SerialPortException {
-        comPort.closePort();
+    public void disconnect() {
+        clearPackage();
     }
 
     public void enableFormatting() {
@@ -77,56 +50,137 @@ public class Mediator {
         inputBlock.getTextField().setFocusable(false);
     }
 
-    public void outputData(String rawPackage) {
-        //String unparsedPackage = PackageManager.unpackMessage(rawPackage);
-        String unparsedPackage = PackageManager.unpackMessage(CRCMaster.decode(rawPackage));
-        if (PackageManager.isSourceMismatched()) {
-            return;
+    public void transferData(char data) {
+        //обнулить счетчик
+        int collisionCounter = 0;
+
+        //пакетный режим -> пакет не полон -> продолжить набирать пакет
+        if (burstModeEnabled && packageIsNotFull()) {
+            addCharToPackage(data);
+            if (packageIsNotFull()) return;
         }
-        if (PackageManager.doesPackageHaveErrors()){
-            sendInfoMessage("Package arrived with errors; unable to fix");
-            return;
+
+        //флаг конца передачи, флаг осуществления пересылки и строка коллизий
+        transmissionIsOver = false;
+        boolean charHasBeenSent = false;
+        StringBuilder collisions = new StringBuilder();
+
+        //начало передачи
+        while(!transmissionIsOver) {
+            //ожидание освобождения канала
+            while (channelIsBusy());
+
+            //передача кадра
+            if (!charHasBeenSent) {
+                if (burstModeEnabled)
+                    sentData(String.valueOf(burstModeBuffer));
+                else
+                    sentData(String.valueOf(data));
+                charHasBeenSent = true;
+            }
+            else {
+                //кадр уже был отправлен -> отправляем сбойный кадр
+                sentData(String.valueOf(Constants.ERROR_SYMBOL));
+            }
+
+            //выжидание окна коллизий
+            try {
+                Thread.sleep(Constants.COLLISION_DURATION);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            //обработка возникновения коллизии
+            if(collisionOccurred()) {
+                //коллизия возникла -> инкрементация счетчика попыток
+                collisions.append(Constants.ERROR_SYMBOL);
+                collisionCounter++;
+
+                //кол-во возможных попыток не превышено -> выжидание случайной задержки
+                if (collisionCounter < Constants.MAX_COLLUSION_AMOUNT) {
+                    try {
+                        Thread.sleep(makeDelayInMillis(collisionCounter));
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                //кол-во возможных попыток превышено -> конец передачи (ошибка)
+                else {
+                    sentData(String.valueOf(Constants.ERROR_SYMBOL));
+                    conductTransmittion();
+                    transmissionIsOver = true;
+                    sendInfoMessage(collisions.toString() + "\t Failure");
+                }
+            }
+            else {
+                //коллизия не возникла -> конец передачи
+                conductTransmittion();
+                transmissionIsOver = true;
+                sendInfoMessage(collisions.toString() + "\t Success");
+                if (burstModeEnabled)
+                    clearPackage();
+            }
         }
-        outputBlock.getTextField().append(unparsedPackage);
-        if (CRCMaster.errorWasDiscovered())
-            sendInfoMessage("Package arrived with an error; error fixed");
-        else
-            sendInfoMessage("Package arrived");
     }
 
-    public void transferData(char data) {
-        putCharIntoDataload(data);
-        if (!dataloadIsFull())
-            return;
-        String binaryMessage = CRCMaster.encode(PackageManager.packMessage(destinationCode,
-                sourceCode, dataLoad), packageErrorEmulation);
-        comPort.sendMessage(binaryMessage);
-        sendInfoMessage(StringTranslator.stringToHex(binaryMessage));
-        clearDataload();
+    private void sentData(String data) {
+        wholeMessage.append(data);
     }
-    private boolean dataloadIsFull(){
-        for (int i = 0; i < dataLoadSize; i++){
-            if(dataLoad[i] == 0) return false;
+
+    private void conductTransmittion(){
+        receiveData(wholeMessage.toString());
+        wholeMessage = new StringBuilder("");
+    }
+
+    private void receiveData(String data) {
+        //кадр сбойный -> вывод не осуществяется
+        if (burstModeEnabled && data.length() < 14
+                || !burstModeEnabled && data.length() < 11) {
+            if (burstModeEnabled)
+                outputBlock.getTextField().append(data.substring(0, 4));
+            else
+                outputBlock.getTextField().append(String.valueOf(data.charAt(0)));
         }
-        return true;
     }
-    private void putCharIntoDataload(char ch){
-        for (int i = 0; i < dataLoadSize; i++){
-            if(dataLoad[i] == 0) {
-                dataLoad[i] = ch;
+
+    private boolean packageIsNotFull(){
+        for (int i = 0; i < Constants.BURST_SIZE; i++){
+            if(burstModeBuffer[i] == 0) return true;
+        }
+        return false;
+    }
+
+    private void addCharToPackage(char ch){
+        for (int i = 0; i < Constants.BURST_SIZE; i++){
+            if(burstModeBuffer[i] == 0) {
+                burstModeBuffer[i] = ch;
                 break;
             }
         }
     }
-    private void clearDataload(){
-        for (int i = 0; i < dataLoadSize; i++){
-            dataLoad[i] = 0;
+
+    private void clearPackage(){
+        for (int i = 0; i < Constants.BURST_SIZE; i++){
+            burstModeBuffer[i] = 0;
         }
     }
 
-    public void sendInfoMessage(String data) {
+    private void sendInfoMessage(String data) {
         settingsBlock.sendInfoMessage(data);
     }
+
+    private int makeDelayInMillis(int n) {
+        return (int)Math.round(Math.random() * Math.pow(2, Math.min(n, Constants.MAX_COLLUSION_AMOUNT)));
+    }
+
+    private boolean channelIsBusy() {
+        return (System.currentTimeMillis() % 2) == 1;
+    }
+
+    private boolean collisionOccurred() {
+        return (System.currentTimeMillis() % 2) != 1;
+    }
+
 
     public OutputBlock getInputBlock() {
         return inputBlock;

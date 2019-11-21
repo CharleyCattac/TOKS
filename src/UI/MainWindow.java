@@ -10,7 +10,7 @@ public class MainWindow {
 
     public void Application() {
         mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        mainWindow.setTitle("COM messenger");
+        mainWindow.setTitle("Channel emulator");
         mainWindow.setSize(540, 540);
         mainWindow.setLocationRelativeTo(null);
 
